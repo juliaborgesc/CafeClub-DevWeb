@@ -32,3 +32,11 @@ $routes->post('/assinaturas/store', 'AssinaturasController::store');
 $routes->get('/assinaturas/edit/(:num)', 'AssinaturasController::edit/$1');
 $routes->post('/assinaturas/update/(:num)', 'AssinaturasController::update/$1');
 $routes->get('/assinaturas/excluir/(:num)', 'AssinaturasController::excluir/$1');
+
+// CAFES
+$routes->get('/cafes', 'CafesController::index');
+$routes->get('/cafes/create', 'CafesController::create');
+$routes->post('/cafes/store', 'CafesController::store');
+$routes->get('/cafes/edit/(:num)', 'CafesController::edit/$1');
+$routes->post('/cafes/update/(:num)', 'CafesController::update/$1');
+$routes->get('/cafes/excluir/(:num)', 'CafesController::excluir/$1');

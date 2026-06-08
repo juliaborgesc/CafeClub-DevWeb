@@ -16,7 +16,8 @@ class ClientesModel extends Model
     protected $allowedFields    = [
         'nome',
         'email',
-        'telefone'
+        'telefone',
+        'perfil'
     ];
 
     protected bool $allowEmptyInserts = false;

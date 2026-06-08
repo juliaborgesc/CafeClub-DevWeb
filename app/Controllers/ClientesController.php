@@ -31,7 +31,8 @@ class ClientesController extends BaseController
         $this->clientesModel->insert([
             'nome' => $this->request->getPost('nome'),
             'email' => $this->request->getPost('email'),
-            'telefone' => $this->request->getPost('telefone')
+            'telefone' => $this->request->getPost('telefone'),
+            'perfil' => $this->request->getPost('perfil')
         ]);
 
         return redirect()->to('/clientes');
@@ -49,7 +50,8 @@ class ClientesController extends BaseController
         $this->clientesModel->update($id, [
             'nome' => $this->request->getPost('nome'),
             'email' => $this->request->getPost('email'),
-            'telefone' => $this->request->getPost('telefone')
+            'telefone' => $this->request->getPost('telefone'),
+            'perfil' => $this->request->getPost('perfil')
         ]);
 
         return redirect()->to('/clientes');
