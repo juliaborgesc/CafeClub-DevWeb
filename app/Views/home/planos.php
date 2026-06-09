@@ -54,76 +54,96 @@
 <!-- Plans -->
 <section class="plans" style="padding-top: 2rem;">
     <div class="container">
-        <div class="plans-grid">
+        <div class="planos-carousel-shell" data-planos-carousel>
 
-            <!-- Básico -->
-            <div class="plan-card">
-                <h3 class="plan-name">Básico</h3>
-                <p class="plan-tagline">Pra quem quer começar sem drama.</p>
-                <div class="plan-price">R$49</div>
-                <div class="plan-period">por mês</div>
-                <ul class="plan-features">
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> 1 pacote de 250g por mês</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Curadoria pelo seu perfil sensorial</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Carta da torrefação</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
-                </ul>
-                <a href="<?= base_url('/assinar/basico') ?>" class="btn btn-outline" style="width:100%; margin-top: auto;">
-                    Assinar agora
-                </a>
-            </div>
+            <div class="planos-carousel">
 
-            <!-- Gold -->
-            <div class="plan-card featured">
-                <span class="plan-badge">Mais Popular</span>
-                <h3 class="plan-name">Gold</h3>
-                <p class="plan-tagline" style="opacity:.7;">Dobrou a dose, dobrou a felicidade.</p>
-                <div class="plan-price">R$89</div>
-                <div class="plan-period">por mês</div>
-                <ul class="plan-features">
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> 2 pacotes de 250g por mês</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Curadoria pelo seu perfil sensorial</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Nota de sabor personalizada</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Carta da torrefação</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Acesso a cafés exclusivos</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
-                </ul>
-                <a href="<?= base_url('/assinar/gold') ?>" class="btn btn-primary" style="width:100%; margin-top: auto;">
-                    Assinar agora
-                </a>
-            </div>
+                <button class="planos-carousel-btn planos-carousel-prev" type="button" aria-label="Plano anterior">
+                    <span aria-hidden="true">‹</span>
+                </button>
 
-            <!-- Premium -->
-            <div class="plan-card">
-                <h3 class="plan-name">Premium</h3>
-                <p class="plan-tagline">Você merecia desde sempre.</p>
-                <div class="plan-price">R$129</div>
-                <div class="plan-period">por mês</div>
-                <ul class="plan-features">
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> 3 pacotes de 250g por mês</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Curadoria pelo seu perfil sensorial</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Nota de sabor personalizada</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Brinde mensal surpresa</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Acesso VIP a lançamentos</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Carta da torrefação</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
-                    <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
-                </ul>
-                <a href="<?= base_url('/assinar/premium') ?>" class="btn btn-secondary" style="width:100%; margin-top: auto;">
-                    Assinar agora
-                </a>
-            </div>
+                <div class="planos-carousel-track">
 
-        </div>
+                    <!-- Básico -->
+                    <div class="plan-card planos-carousel-item" data-idx="0">
+                        <div style="height: 22px;"></div>
+                        <h3 class="plan-name">Básico</h3>
+                        <p class="plan-tagline">Pra quem quer começar sem drama.</p>
+                        <div class="plan-price">R$49</div>
+                        <div class="plan-period">por mês</div>
+                        <ul class="plan-features">
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> 1 pacote de 250g por mês</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Curadoria pelo seu perfil sensorial</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Carta da torrefação</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
+                        </ul>
+                        <a href="<?= base_url('/assinar/basico') ?>" class="btn btn-outline plan-cta">
+                            Assinar agora
+                        </a>
+                    </div>
+
+                    <!-- Gold -->
+                    <div class="plan-card planos-carousel-item" data-idx="1">
+                        <span class="plan-badge">Mais Popular</span>
+                        <h3 class="plan-name">Gold</h3>
+                        <p class="plan-tagline">Dobrou a dose, dobrou a felicidade.</p>
+                        <div class="plan-price">R$89</div>
+                        <div class="plan-period">por mês</div>
+                        <ul class="plan-features">
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> 2 pacotes de 250g por mês</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Curadoria pelo seu perfil sensorial</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Nota de sabor personalizada</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Carta da torrefação</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Acesso a cafés exclusivos</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
+                        </ul>
+                        <a href="<?= base_url('/assinar/gold') ?>" class="btn btn-primary plan-cta">
+                            Assinar agora
+                        </a>
+                    </div>
+
+                    <!-- Premium -->
+                    <div class="plan-card planos-carousel-item" data-idx="2">
+                        <div style="height: 22px;"></div>
+                        <h3 class="plan-name">Premium</h3>
+                        <p class="plan-tagline">Você merecia desde sempre.</p>
+                        <div class="plan-price">R$129</div>
+                        <div class="plan-period">por mês</div>
+                        <ul class="plan-features">
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> 3 pacotes de 250g por mês</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Curadoria pelo seu perfil sensorial</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Nota de sabor personalizada</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Brinde mensal surpresa</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Acesso VIP a lançamentos</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Carta da torrefação</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
+                            <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
+                        </ul>
+                        <a href="<?= base_url('/assinar/premium') ?>" class="btn btn-secondary plan-cta">
+                            Assinar agora
+                        </a>
+                    </div>
+
+                </div><!-- /.planos-carousel-track -->
+
+                <button class="planos-carousel-btn planos-carousel-next" type="button" aria-label="Próximo plano">
+                    <span aria-hidden="true">›</span>
+                </button>
+
+            </div><!-- /.planos-carousel -->
+
+            <div class="planos-carousel-dots" aria-label="Selecionar plano"></div>
+
+        </div><!-- /.planos-carousel-shell -->
     </div>
 </section>
 
 <!-- Comparativo -->
-<section style="background: white; padding: 4rem 2rem;">
+<section class="compare-section">
     <div class="container">
-        <h2 class="section-title font-display" style="margin-bottom: 2.5rem;">Compare os planos</h2>
+        <h2 class="section-title font-display section-title-spaced">Compare os planos</h2>
         <div class="planos-table-wrap">
             <table class="planos-table">
                 <thead>
@@ -196,11 +216,11 @@
 </section>
 
 <!-- CTA não sabe qual escolher -->
-<section class="final-cta" style="margin: 0 1rem 4rem;">
+<section class="final-cta final-cta-planos">
     <div class="container">
         <h2 class="section-title font-display">Não sabe qual escolher?</h2>
         <p class="section-subtitle">Faça o quiz de paladar e descubra seu perfil sensorial antes de assinar.</p>
-        <a href="<?= base_url('/quiz') ?>" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.25rem 3rem;">
+        <a href="<?= base_url('/quiz') ?>" class="btn btn-primary btn-large-quiz">
             Fazer o quiz grátis
         </a>
     </div>
@@ -246,130 +266,107 @@
     </div>
 </footer>
 
-<style>
-    .planos-hero-label {
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.16em;
-        color: rgba(79, 51, 40, 0.4);
-        margin-bottom: 12px;
-    }
-
-    .plan-tagline {
-        font-size: 0.9rem;
-        opacity: 0.6;
-        margin-bottom: 1.5rem;
-        margin-top: -0.5rem;
-    }
-
-    .plan-card {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .plan-features {
-        flex: 1;
-    }
-
-    /* TABELA COMPARATIVA */
-    .planos-table-wrap {
-        overflow-x: auto;
-    }
-
-    .planos-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.95rem;
-    }
-
-    .planos-table thead th {
-        padding: 1rem 1.5rem;
-        font-family: 'Anton', sans-serif;
-        font-size: 1.1rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: var(--primary-dark);
-        text-align: center;
-        border-bottom: 2px solid rgba(79, 51, 40, 0.1);
-    }
-
-    .planos-table thead th:first-child {
-        text-align: left;
-    }
-
-    .planos-table tbody td {
-        padding: 1rem 1.5rem;
-        border-bottom: 1px solid rgba(79, 51, 40, 0.07);
-        text-align: center;
-        color: var(--primary-dark);
-    }
-
-    .planos-table tbody td:first-child {
-        text-align: left;
-        font-weight: 500;
-    }
-
-    .planos-table tbody tr:last-child td {
-        border-bottom: none;
-    }
-
-    .planos-table-featured {
-        background: rgba(79, 51, 40, 0.04);
-    }
-
-    .planos-table-price-row td {
-        padding-top: 1.5rem;
-        font-size: 1.1rem;
-    }
-
-    .check-yes {
-        color: var(--secondary-green);
-        font-size: 1.3rem;
-    }
-
-    .check-no {
-        color: rgba(79, 51, 40, 0.2);
-        font-size: 1.3rem;
-    }
-
-    @media (max-width: 768px) {
-        .planos-table thead th,
-        .planos-table tbody td {
-            padding: 0.75rem 1rem;
-            font-size: 0.85rem;
-        }
-    }
-</style>
 
 <script>
+    // Header scroll
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
-        header.classList.toggle('scrolled', window.scrollY > 50);
+        if (header) header.classList.toggle('scrolled', window.scrollY > 50);
     });
 
+    // Mobile menu
     function toggleMobileMenu() {
         const mobileMenu = document.getElementById('mobileMenu');
+        if (!mobileMenu) return;
         mobileMenu.classList.toggle('active');
         document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
     }
 
-    document.querySelectorAll('.plan-card, .planos-table').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    });
+    // Carrossel infinito circular
+    function iniciarCarrosseisPlanos() {
+        document.querySelectorAll('[data-planos-carousel]').forEach(carousel => {
+            const track    = carousel.querySelector('.planos-carousel-track');
+            const items    = Array.from(carousel.querySelectorAll('.planos-carousel-item'));
+            const btnPrev  = carousel.querySelector('.planos-carousel-prev');
+            const btnNext  = carousel.querySelector('.planos-carousel-next');
+            const dotsWrap = carousel.querySelector('.planos-carousel-dots');
+            const viewport = carousel.querySelector('.planos-carousel');
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+            if (!track || !items.length) return;
+
+            const n = items.length;
+            let center = 1; // Gold começa no centro
+
+            // Cria dots
+            if (dotsWrap) {
+                dotsWrap.innerHTML = '';
+                items.forEach((_, i) => {
+                    const dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.className = 'planos-dot';
+                    dot.setAttribute('aria-label', `Ver plano ${i + 1}`);
+                    dot.addEventListener('click', () => goTo(i));
+                    dotsWrap.appendChild(dot);
+                });
             }
-        });
-    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.plan-card, .planos-table').forEach(el => observer.observe(el));
+            const dots = dotsWrap ? Array.from(dotsWrap.querySelectorAll('.planos-dot')) : [];
+
+            function mod(x, m) {
+                return ((x % m) + m) % m;
+            }
+
+            function goTo(idx) {
+                center = mod(idx, n);
+                render();
+            }
+
+            function render() {
+                const leftIdx  = mod(center - 1, n);
+                const rightIdx = mod(center + 1, n);
+
+                items.forEach((card, i) => {
+                    if (i === center)          card.dataset.pos = 'center';
+                    else if (i === leftIdx)    card.dataset.pos = 'left';
+                    else if (i === rightIdx)   card.dataset.pos = 'right';
+                    else                       delete card.dataset.pos;
+                });
+
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === center);
+                    dot.setAttribute('aria-current', i === center ? 'true' : 'false');
+                });
+            }
+
+            // Navegação
+            if (btnPrev) btnPrev.addEventListener('click', () => goTo(center - 1));
+            if (btnNext) btnNext.addEventListener('click', () => goTo(center + 1));
+
+            // Clique nos cards laterais centraliza
+            items.forEach((card, i) => {
+                card.addEventListener('click', () => {
+                    if (card.dataset.pos !== 'center') goTo(i);
+                });
+            });
+
+            // Swipe touch
+            let startX = 0;
+            if (viewport) {
+                viewport.addEventListener('touchstart', e => {
+                    startX = e.touches[0].clientX;
+                }, { passive: true });
+
+                viewport.addEventListener('touchend', e => {
+                    const diff = startX - e.changedTouches[0].clientX;
+                    if (Math.abs(diff) > 50) goTo(center + (diff > 0 ? 1 : -1));
+                });
+            }
+
+            render();
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', iniciarCarrosseisPlanos);
 </script>
 
 </body>

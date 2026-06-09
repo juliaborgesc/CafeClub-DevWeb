@@ -5,21 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brasa Café Clube | Seu Café do Seu Jeito</title>
     <meta name="description" content="Clube de assinatura de café especial. Descubra seu perfil sensorial e receba cafés selecionados todo mês.">
-    <!-- Favicon padrão para navegadores -->
     <link rel="icon" href="<?= base_url('images/logo.svg') ?>" type="image/svg+xml">
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Condiment&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Hugeicons -->
     <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css">
-    
-    <!-- External CSS -->
     <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
 </head>
 <body>
+
     <!-- Header -->
     <header id="header">
         <img src="<?= base_url('images/brasinha.svg') ?>" alt="Brasa Cafe Clube" class="logo">
@@ -54,13 +49,13 @@
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-blur"></div>
-        
+
         <div class="hero-content">
             <div class="hero-text">
                 <h1 class="hero-title font-display">
-                    Seu Café  
+                    Seu Café
 
-                    <span class="hero-highlight">Do Seu Jeito</span>  
+                    <span class="hero-highlight">Do Seu Jeito</span>
 
                     Todo Mês
                 </h1>
@@ -73,7 +68,7 @@
                     <a href="#como-funciona" class="btn btn-outline" style="border-color: white; color: white;">Como funciona</a>
                 </div>
             </div>
-            
+
             <div class="hero-icons">
                 <a href="#como-funciona" class="hero-icon-item">
                     <i class="hgi-stroke hgi-quiz-02"></i>
@@ -126,7 +121,7 @@
         <div class="container">
             <div class="social-proof-number font-display">+10.000</div>
             <div class="social-proof-label">assinantes satisfeitos em todo Brasil</div>
-            
+
             <div class="trust-indicators">
                 <div class="trust-item">
                     <i class="hgi-stroke hgi-checkmark-circle-02"></i>
@@ -185,7 +180,7 @@
         <div class="container">
             <h2 class="section-title font-display">Por Que Assinar?</h2>
             <p class="section-subtitle">Benefícios exclusivos para membros do clube</p>
-            
+
             <div class="benefits-grid">
                 <div class="benefit-card">
                     <div class="benefit-icon">
@@ -224,7 +219,7 @@
         <div class="container">
             <h2 class="section-title font-display">Como Funciona</h2>
             <p class="section-subtitle">Três passos simples para receber café do seu jeito</p>
-            
+
             <div class="steps">
                 <div class="step">
                     <div class="step-number">
@@ -251,58 +246,36 @@
         </div>
     </section>
 
-    <!-- Sensory Profiles Section -->
-    <section id="perfis">
-        <div class="container">
-            <h2 class="section-title font-display">Perfis Sensoriais</h2>
-            <p class="section-subtitle">Descubra qual perfil combina mais com você</p>
-            
-            <div class="profiles-grid">
-                <div class="profile-card">
-                    <div class="profile-header">
-                        <img src="<?= base_url('images/iniciante.svg') ?>" alt="Perfil Iniciante" class="profile-icon-img">
-                        <h3 class="profile-name font-display">Iniciante</h3>
-                    </div>
-                    <div class="profile-body">
-                        <p class="profile-desc">Para quem está começando a explorar o mundo dos cafés especiais. Sabores suaves, equilibrados e acessíveis.</p>
-                        <div class="profile-notes">
-                            <span class="profile-note">Chocolate</span>
-                            <span class="profile-note">Caramelo</span>
-                            <span class="profile-note">Nozes</span>
-                            <span class="profile-note">Suave</span>
-                        </div>
-                    </div>
+  <!-- Perfis Section -->
+    <section class="profiles-sensorial" id="perfis">
+        <div class="profiles-bg"></div>
+        <div class="profiles-overlay"></div>
+        <div class="profiles-blur"></div>
+
+        <div class="profiles-content">
+            <div class="profiles-text-box">
+                <span class="profiles-label">Perfis sensoriais</span>
+
+                <h2 class="profiles-title font-display">
+                    Descubra Seu<br>
+                    Perfil Sensorial
+                </h2>
+
+                <p class="profiles-desc-hero">
+                    Responda ao quiz e descubra qual tipo de café combina com seu paladar, sua rotina e seu jeito de viver café.
+                </p>
+
+                <div class="profiles-badges">
+                    <span>Iniciante</span>
+                    <span>Equilibrado</span>
+                    <span>Frutado</span>
+                    <span>Intenso</span>
+                    <span>Explorador</span>
                 </div>
-                <div class="profile-card">
-                    <div class="profile-header">
-                        <img src="<?= base_url('images/frutado.svg') ?>" alt="Perfil Frutado" class="profile-icon-img">
-                        <h3 class="profile-name font-display">Frutado</h3>
-                    </div>
-                    <div class="profile-body">
-                        <p class="profile-desc">Para paladares curiosos que apreciam acidez vibrante e notas frutadas complexas. Uma explosão de sabores.</p>
-                        <div class="profile-notes">
-                            <span class="profile-note">Frutas vermelhas</span>
-                            <span class="profile-note">Cítrico</span>
-                            <span class="profile-note">Floral</span>
-                            <span class="profile-note">Vibrante</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="profile-card">
-                    <div class="profile-header">
-                        <img src="<?= base_url('images/intenso.svg') ?>" alt="Perfil Intenso" class="profile-icon-img">
-                        <h3 class="profile-name font-display">Intenso</h3>
-                    </div>
-                    <div class="profile-body">
-                        <p class="profile-desc">Para quem ama café encorpado e marcante. Sabores robustos que deixam impressão duradoura.</p>
-                        <div class="profile-notes">
-                            <span class="profile-note">Cacau</span>
-                            <span class="profile-note">Especiarias</span>
-                            <span class="profile-note">Tostado</span>
-                            <span class="profile-note">Encorpado</span>
-                        </div>
-                    </div>
-                </div>
+
+                <a href="/quiz" class="btn btn-primary profiles-btn">
+                    Faça o Quiz
+                </a>
             </div>
         </div>
     </section>
@@ -312,49 +285,84 @@
         <div class="container">
             <h2 class="section-title font-display">Escolha Seu Plano</h2>
             <p class="section-subtitle">Opções flexíveis para todo tipo de amante de café</p>
-            
-            <div class="plans-grid">
-                <div class="plan-card">
-                    <h3 class="plan-name">Básico</h3>
-                    <div class="plan-price">R$49</div>
-                    <div class="plan-period">por mês</div>
-                    <ul class="plan-features">
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> 1 pacote de 250g</li>
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Perfil personalizado</li>
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
-                    </ul>
-                    <a href="#" class="btn btn-outline">Assinar Agora</a>
-                </div>
-                <div class="plan-card featured">
-                    <span class="plan-badge">Mais Popular</span>
-                    <h3 class="plan-name">Gold</h3>
-                    <div class="plan-price">R$89</div>
-                    <div class="plan-period">por mês</div>
-                    <ul class="plan-features">
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> 2 pacotes de 250g</li>
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Perfil personalizado</li>
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Acesso a cafés exclusivos</li>
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
-                    </ul>
-                    <a href="#" class="btn btn-primary">Assinar Agora</a>
-                </div>
-                <div class="plan-card">
-                    <h3 class="plan-name">Premium</h3>
-                    <div class="plan-price">R$129</div>
-                    <div class="plan-period">por mês</div>
-                    <ul class="plan-features">
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> 3 pacotes de 250g</li>
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Perfil personalizado</li>
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Brinde exclusivo mensal</li>
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Acesso VIP a lançamentos</li>
-                        <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
-                    </ul>
-                    <a href="#" class="btn btn-secondary">Assinar Agora</a>
-                </div>
-            </div>
+
+            <div class="planos-carousel-shell" data-planos-carousel>
+
+                <div class="planos-carousel">
+
+                    <button class="planos-carousel-btn planos-carousel-prev" type="button" aria-label="Plano anterior">
+                        <span aria-hidden="true">‹</span>
+                    </button>
+
+                    <div class="planos-carousel-track">
+
+                        <!-- Básico -->
+                        <div class="plan-card planos-carousel-item" data-idx="0">
+                            <div style="height: 22px;"></div>
+                            <h3 class="plan-name">Básico</h3>
+                            <p class="plan-tagline">Pra quem quer começar sem drama.</p>
+                            <div class="plan-price">R$49</div>
+                            <div class="plan-period">por mês</div>
+                            <ul class="plan-features">
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> 1 pacote de 250g por mês</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Curadoria pelo seu perfil sensorial</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Carta da torrefação</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
+                            </ul>
+                            <a href="<?= base_url('/assinar/basico') ?>" class="btn btn-outline plan-cta">Assinar agora</a>
+                        </div>
+
+                        <!-- Gold -->
+                        <div class="plan-card planos-carousel-item" data-idx="1">
+                            <span class="plan-badge">Mais Popular</span>
+                            <h3 class="plan-name">Gold</h3>
+                            <p class="plan-tagline">Dobrou a dose, dobrou a felicidade.</p>
+                            <div class="plan-price">R$89</div>
+                            <div class="plan-period">por mês</div>
+                            <ul class="plan-features">
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> 2 pacotes de 250g por mês</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Curadoria pelo seu perfil sensorial</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Nota de sabor personalizada</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Carta da torrefação</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Acesso a cafés exclusivos</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
+                            </ul>
+                            <a href="<?= base_url('/assinar/gold') ?>" class="btn btn-primary plan-cta">Assinar agora</a>
+                        </div>
+
+                        <!-- Premium -->
+                        <div class="plan-card planos-carousel-item" data-idx="2">
+                            <div style="height: 22px;"></div>
+                            <h3 class="plan-name">Premium</h3>
+                            <p class="plan-tagline">Você merecia desde sempre.</p>
+                            <div class="plan-price">R$129</div>
+                            <div class="plan-period">por mês</div>
+                            <ul class="plan-features">
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> 3 pacotes de 250g por mês</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Curadoria pelo seu perfil sensorial</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Nota de sabor personalizada</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Brinde mensal surpresa</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Acesso VIP a lançamentos</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Carta da torrefação</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
+                                <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
+                            </ul>
+                            <a href="<?= base_url('/assinar/premium') ?>" class="btn btn-secondary plan-cta">Assinar agora</a>
+                        </div>
+
+                    </div><!-- /.planos-carousel-track -->
+
+                    <button class="planos-carousel-btn planos-carousel-next" type="button" aria-label="Próximo plano">
+                        <span aria-hidden="true">›</span>
+                    </button>
+
+                </div><!-- /.planos-carousel -->
+
+                <div class="planos-carousel-dots" aria-label="Selecionar plano"></div>
+
+            </div><!-- /.planos-carousel-shell -->
         </div>
     </section>
 
@@ -363,7 +371,7 @@
         <div class="container">
             <h2 class="section-title font-display">O Que Dizem Nossos Assinantes</h2>
             <p class="section-subtitle">Histórias reais de quem já faz parte do clube</p>
-            
+
             <div class="testimonials-grid">
                 <div class="testimonial-large">
                     <p class="testimonial-large-text">"Sou assinante há mais de um ano e posso dizer que minha relação com café mudou completamente. Antes tomava qualquer um, agora entendo as nuances e aprecio cada xícara como uma experiência única. O Brasa Café Clube abriu um mundo novo para mim."</p>
@@ -394,7 +402,7 @@
         <div class="container">
             <h2 class="section-title font-display">Perguntas Frequentes</h2>
             <p class="section-subtitle">Tire suas dúvidas sobre o clube</p>
-            
+
             <div class="faq-list">
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
@@ -505,63 +513,123 @@
     </footer>
 
     <script>
-        // Header scroll effect
+        // Header scroll
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+            if (header) header.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Mobile menu toggle
+        // Mobile menu
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
+            if (!mobileMenu) return;
             mobileMenu.classList.toggle('active');
             document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
         }
+
+        // Carrossel infinito circular
+        function iniciarCarrosseisPlanos() {
+            document.querySelectorAll('[data-planos-carousel]').forEach(carousel => {
+                const track    = carousel.querySelector('.planos-carousel-track');
+                const items    = Array.from(carousel.querySelectorAll('.planos-carousel-item'));
+                const btnPrev  = carousel.querySelector('.planos-carousel-prev');
+                const btnNext  = carousel.querySelector('.planos-carousel-next');
+                const dotsWrap = carousel.querySelector('.planos-carousel-dots');
+                const viewport = carousel.querySelector('.planos-carousel');
+
+                if (!track || !items.length) return;
+
+                const n = items.length;
+                let center = 1; // Gold começa no centro
+
+                if (dotsWrap) {
+                    dotsWrap.innerHTML = '';
+                    items.forEach((_, i) => {
+                        const dot = document.createElement('button');
+                        dot.type = 'button';
+                        dot.className = 'planos-dot';
+                        dot.setAttribute('aria-label', `Ver plano ${i + 1}`);
+                        dot.addEventListener('click', () => goTo(i));
+                        dotsWrap.appendChild(dot);
+                    });
+                }
+
+                const dots = dotsWrap ? Array.from(dotsWrap.querySelectorAll('.planos-dot')) : [];
+
+                function mod(x, m) {
+                    return ((x % m) + m) % m;
+                }
+
+                function goTo(idx) {
+                    center = mod(idx, n);
+                    render();
+                }
+
+                function render() {
+                    const leftIdx  = mod(center - 1, n);
+                    const rightIdx = mod(center + 1, n);
+
+                    items.forEach((card, i) => {
+                        if (i === center)        card.dataset.pos = 'center';
+                        else if (i === leftIdx)  card.dataset.pos = 'left';
+                        else if (i === rightIdx) card.dataset.pos = 'right';
+                        else                     delete card.dataset.pos;
+                    });
+
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === center);
+                        dot.setAttribute('aria-current', i === center ? 'true' : 'false');
+                    });
+                }
+
+                if (btnPrev) btnPrev.addEventListener('click', () => goTo(center - 1));
+                if (btnNext) btnNext.addEventListener('click', () => goTo(center + 1));
+
+                items.forEach((card, i) => {
+                    card.addEventListener('click', () => {
+                        if (card.dataset.pos !== 'center') goTo(i);
+                    });
+                });
+
+                // Swipe touch
+                let startX = 0;
+                if (viewport) {
+                    viewport.addEventListener('touchstart', e => {
+                        startX = e.touches[0].clientX;
+                    }, { passive: true });
+                    viewport.addEventListener('touchend', e => {
+                        const diff = startX - e.changedTouches[0].clientX;
+                        if (Math.abs(diff) > 50) goTo(center + (diff > 0 ? 1 : -1));
+                    });
+                }
+
+                render();
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', iniciarCarrosseisPlanos);
 
         // FAQ accordion
         function toggleFaq(button) {
             const faqItem = button.parentElement;
             const isActive = faqItem.classList.contains('active');
-            
-            // Close all other FAQ items
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // Toggle current item
-            if (!isActive) {
-                faqItem.classList.add('active');
-            }
+            document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
+            if (!isActive) faqItem.classList.add('active');
         }
 
-        // Smooth scroll for anchor links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const headerOffset = 80;
-                    const elementPosition = target.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
+                    const offsetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
                 }
             });
         });
 
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        // Scroll animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -569,10 +637,9 @@
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        // Observe elements for animation
-        document.querySelectorAll('.benefit-card, .profile-card, .plan-card, .testimonial-card, .testimonial-large, .step').forEach(el => {
+        document.querySelectorAll('.benefit-card, .profile-card, .testimonial-card, .testimonial-large, .step').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
