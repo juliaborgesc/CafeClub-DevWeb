@@ -99,6 +99,7 @@ $dados     = $perfis[$perfilKey] ?? $perfis['equilibrado'];
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css">
+    <link rel="icon" href="<?= base_url('images/logo.svg') ?>" type="image/svg+xml">
 
     <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/quiz.css') ?>">
@@ -107,8 +108,9 @@ $dados     = $perfis[$perfilKey] ?? $perfis['equilibrado'];
 <body class="result-body" style="--profile-accent: <?= $dados['accent'] ?>;">
 
 <header class="result-header">
-    <a href="<?= base_url('/') ?>" class="result-logo">Brasa Café Clube</a>
-</header>
+    <a href="<?= base_url('/') ?>">
+        <img src="<?= base_url('images/brasinha.svg') ?>" alt="Brasa Café Clube" class="logo">
+    </a></header>
 
 <main class="result-wrapper">
     <section class="result-reveal-card">

@@ -783,6 +783,7 @@ section {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .plan-tagline {
@@ -1583,4 +1584,555 @@ footer {
     .profiles-btn {
         width: 100%;
     }
+}
+/* =========================================================
+   PÁGINA PERFIS SENSORIAIS — CARROSSEL 1 CARD POR VEZ
+   ========================================================= */
+
+.profile-carousel-page {
+    background:
+        radial-gradient(circle at top left, rgba(226, 132, 19, 0.10), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(79, 51, 40, 0.10), transparent 28%),
+        var(--background);
+    min-height: 100vh;
+    padding-top: 7rem;
+}
+
+.profile-carousel-hero {
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 5rem 2rem 2rem;
+}
+
+.profile-carousel-kicker {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+}
+
+.profile-carousel-title {
+    font-size: clamp(3.2rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+}
+
+.profile-carousel-subtitle {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    color: var(--primary-dark);
+    opacity: 0.78;
+    line-height: 1.7;
+}
+
+.profile-carousel-section {
+    padding: 2rem 2rem 5rem;
+}
+
+.profile-carousel-shell {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.profile-carousel-viewport {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+}
+
+.profile-carousel-track {
+    display: flex;
+    transition: transform 0.55s cubic-bezier(0.34, 1, 0.64, 1);
+    will-change: transform;
+}
+
+.profile-slide {
+    min-width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(79, 51, 40, 0.08);
+    box-shadow: 0 18px 55px rgba(79, 51, 40, 0.08);
+    display: grid;
+    grid-template-columns: 1.05fr 340px 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    padding: 3.5rem;
+}
+
+.profile-slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, color-mix(in srgb, var(--profile-color) 16%, transparent), transparent 42%),
+        radial-gradient(circle at 15% 20%, color-mix(in srgb, var(--profile-color) 20%, transparent), transparent 30%);
+    pointer-events: none;
+}
+
+.profile-slide::after {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 10px;
+    background: var(--profile-color);
+}
+
+.profile-slide-left,
+.profile-slide-center,
+.profile-slide-right {
+    position: relative;
+    z-index: 2;
+}
+
+/* número removido do PHP, mas deixo escondido caso ainda exista */
+.profile-slide-number {
+    display: none;
+}
+
+.profile-slide-title {
+    font-size: clamp(3.4rem, 6vw, 6rem);
+    line-height: 0.9;
+    color: var(--primary-dark);
+    margin-bottom: 0.7rem;
+}
+
+.profile-slide-tagline {
+    color: var(--profile-color);
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 1.4rem;
+}
+
+.profile-slide-desc {
+    color: var(--primary-dark);
+    opacity: 0.82;
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 1.4rem;
+}
+
+.profile-slide-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-bottom: 1.4rem;
+}
+
+.profile-slide-badges span,
+.profile-slide-notes span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: var(--primary-dark);
+    border: 1px solid rgba(79, 51, 40, 0.08);
+    border-radius: 999px;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+    box-shadow: 0 8px 20px rgba(79, 51, 40, 0.05);
+    white-space: nowrap;
+}
+
+.profile-slide-notes {
+    background: rgba(250, 245, 233, 0.72);
+    border: 1px solid rgba(79, 51, 40, 0.08);
+    border-radius: var(--radius-md);
+    padding: 1.2rem;
+}
+
+.profile-slide-notes strong {
+    display: block;
+    margin-bottom: 0.8rem;
+    color: var(--primary-dark);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.profile-slide-notes div {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.45rem;
+    align-items: center;
+}
+
+.profile-slide-notes span {
+    background: color-mix(in srgb, var(--profile-color) 16%, white);
+    box-shadow: none;
+    font-size: 0.72rem;
+    padding: 0.42rem 0.58rem;
+}
+
+/* Boneco solto, grande, sem card */
+.profile-slide-image-card {
+    position: relative;
+    width: 340px;
+    height: 390px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.profile-slide-glow {
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    background: color-mix(in srgb, var(--profile-color) 38%, transparent);
+    filter: blur(42px);
+    border-radius: 50%;
+    opacity: 0.9;
+}
+
+.profile-slide-image-card img {
+    position: relative;
+    z-index: 2;
+    max-width: 310px;
+    max-height: 350px;
+    object-fit: contain;
+    filter: drop-shadow(0 24px 24px rgba(79, 51, 40, 0.22));
+}
+
+.profile-slide-right h3 {
+    color: var(--primary-dark);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 1.2rem;
+}
+
+.profile-slide-bars {
+    background: rgba(250, 245, 233, 0.72);
+    border: 1px solid rgba(79, 51, 40, 0.08);
+    border-radius: var(--radius-md);
+    padding: 1.3rem;
+    margin-bottom: 1.2rem;
+}
+
+.profile-slide-bar-row:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.profile-slide-bar-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.35rem;
+    color: var(--primary-dark);
+    font-size: 0.86rem;
+    font-weight: 800;
+}
+
+.profile-slide-bar-label strong {
+    color: var(--profile-color);
+    font-size: 0.78rem;
+}
+
+.profile-slide-bar-track {
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(79, 51, 40, 0.10);
+    overflow: hidden;
+}
+
+.profile-slide-bar-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--profile-color) 70%, #ffffff),
+        var(--profile-color)
+    );
+}
+
+.profile-slide-ideal {
+    background: rgba(250, 245, 233, 0.72);
+    border: 1px solid rgba(79, 51, 40, 0.08);
+    border-radius: var(--radius-md);
+    padding: 1.3rem;
+}
+
+.profile-slide-ideal strong {
+    display: block;
+    margin-bottom: 0.7rem;
+    color: var(--primary-dark);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.profile-slide-ideal p {
+    color: var(--primary-dark);
+    opacity: 0.78;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.profile-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(79, 51, 40, 0.12);
+    background: #ffffff;
+    color: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    font-size: 2.4rem;
+    line-height: 1;
+    box-shadow: 0 12px 30px rgba(79, 51, 40, 0.14);
+    transition: all 0.2s ease;
+}
+
+.profile-carousel-btn:hover {
+    background: var(--primary-dark);
+    color: var(--text-light);
+    border-color: var(--primary-dark);
+}
+
+.profile-carousel-prev {
+    left: -27px;
+}
+
+.profile-carousel-next {
+    right: -27px;
+}
+
+.profile-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.65rem;
+    margin-top: 1.5rem;
+}
+
+.profile-carousel-dot {
+    width: 10px;
+    height: 10px;
+    border: none;
+    padding: 0;
+    border-radius: 50%;
+    background: rgba(79, 51, 40, 0.22);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.profile-carousel-dot.active {
+    background: var(--primary-dark);
+    transform: scale(1.35);
+}
+
+.profile-carousel-cta {
+    max-width: 1200px;
+    margin: 0 auto 5rem;
+    padding: 4rem 4rem;
+    border-radius: var(--radius-lg);
+    background:
+        radial-gradient(circle at top right, rgba(226, 132, 19, 0.16), transparent 32%),
+        var(--primary-dark);
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    overflow: hidden;
+}
+
+.profile-carousel-cta-content {
+    max-width: 760px;
+}
+
+.profile-carousel-cta span {
+    display: inline-block;
+    margin-bottom: 0.8rem;
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+}
+
+.profile-carousel-cta h2 {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 0.92;
+    margin-bottom: 1.2rem;
+    max-width: 780px;
+}
+
+.profile-carousel-cta p {
+    opacity: 0.78;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 680px;
+}
+
+.profile-carousel-cta-btn {
+    flex-shrink: 0;
+    padding: 1.3rem 2.6rem;
+    font-size: 0.95rem;
+    border-radius: 18px;
+    min-width: 190px;
+}
+
+@media (max-width: 850px) {
+    .profile-carousel-cta {
+        margin: 0 1rem 4rem;
+        padding: 3rem 1.6rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .profile-carousel-cta h2 {
+        font-size: clamp(2.8rem, 12vw, 4.5rem);
+    }
+
+    .profile-carousel-cta p {
+        margin: 0 auto;
+    }
+
+    .profile-carousel-cta-btn {
+        width: 100%;
+        max-width: 320px;
+    }
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 1100px) {
+    .profile-slide {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .profile-slide-badges,
+    .profile-slide-notes div {
+        justify-content: center;
+    }
+
+    .profile-slide-image-card {
+        margin: 0 auto;
+    }
+
+    .profile-carousel-prev {
+        left: 10px;
+    }
+
+    .profile-carousel-next {
+        right: 10px;
+    }
+}
+
+@media (max-width: 700px) {
+    .profile-carousel-page {
+        padding-top: 5.5rem;
+    }
+
+    .profile-carousel-hero {
+        padding: 4rem 1rem 2rem;
+    }
+
+    .profile-carousel-section {
+        padding: 2rem 1rem 4rem;
+    }
+
+    .profile-slide {
+        padding: 2rem 1.2rem;
+    }
+
+    .profile-slide-title {
+        font-size: 3.2rem;
+    }
+
+    .profile-slide-image-card {
+        width: 100%;
+        max-width: 300px;
+        height: 310px;
+    }
+
+    .profile-slide-glow {
+        width: 190px;
+        height: 190px;
+        filter: blur(36px);
+    }
+
+    .profile-slide-image-card img {
+        max-width: 270px;
+        max-height: 300px;
+    }
+
+    .profile-slide-notes div {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 0.3rem;
+        scrollbar-width: none;
+    }
+
+    .profile-slide-notes div::-webkit-scrollbar {
+        display: none;
+    }
+
+    .profile-carousel-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 1.9rem;
+    }
+
+    .profile-carousel-prev {
+        left: -4px;
+    }
+
+    .profile-carousel-next {
+        right: -4px;
+    }
+}
+    .profiles-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.profiles-more-link {
+    color: var(--primary-dark);
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.75;
+    transition: all 0.25s ease;
+}
+
+.profiles-more-link span {
+    display: inline-block;
+    margin-left: 0.35rem;
+    transition: transform 0.25s ease;
+}
+
+.profiles-more-link:hover {
+    color: var(--accent);
+    opacity: 1;
+}
+
+.profiles-more-link:hover span {
+    transform: translateX(4px);
 }

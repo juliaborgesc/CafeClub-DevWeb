@@ -247,38 +247,44 @@
     </section>
 
   <!-- Perfis Section -->
-    <section class="profiles-sensorial" id="perfis">
-        <div class="profiles-bg"></div>
-        <div class="profiles-overlay"></div>
-        <div class="profiles-blur"></div>
+<section class="profiles-sensorial" id="perfis">
+    <div class="profiles-bg"></div>
+    <div class="profiles-overlay"></div>
+    <div class="profiles-blur"></div>
 
-        <div class="profiles-content">
-            <div class="profiles-text-box">
-                <span class="profiles-label">Perfis sensoriais</span>
+    <div class="profiles-content">
+        <div class="profiles-text-box">
+            <span class="profiles-label">Perfis sensoriais</span>
 
-                <h2 class="profiles-title font-display">
-                    Descubra Seu<br>
-                    Perfil Sensorial
-                </h2>
+            <h2 class="profiles-title font-display">
+                Descubra Seu<br>
+                Perfil Sensorial
+            </h2>
 
-                <p class="profiles-desc-hero">
-                    Responda ao quiz e descubra qual tipo de café combina com seu paladar, sua rotina e seu jeito de viver café.
-                </p>
+            <p class="profiles-desc-hero">
+                Responda ao quiz e descubra qual tipo de café combina com seu paladar, sua rotina e seu jeito de viver café.
+            </p>
 
-                <div class="profiles-badges">
-                    <span>Iniciante</span>
-                    <span>Equilibrado</span>
-                    <span>Frutado</span>
-                    <span>Intenso</span>
-                    <span>Explorador</span>
-                </div>
+            <div class="profiles-badges">
+                <span>Iniciante</span>
+                <span>Equilibrado</span>
+                <span>Frutado</span>
+                <span>Intenso</span>
+                <span>Explorador</span>
+            </div>
 
-                <a href="/quiz" class="btn btn-primary profiles-btn">
+            <div class="profiles-actions">
+                <a href="<?= base_url('/quiz') ?>" class="btn btn-primary profiles-btn">
                     Faça o Quiz
+                </a>
+
+                <a href="<?= base_url('/perfis') ?>" class="profiles-more-link">
+                    Saiba mais sobre os perfis
                 </a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Plans Section -->
     <section class="plans" id="planos">

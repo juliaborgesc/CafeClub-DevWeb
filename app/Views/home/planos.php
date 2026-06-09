@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planos — Brasa Café Clube</title>
+    <link rel="icon" href="<?= base_url('images/logo.svg') ?>" type="image/svg+xml">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,8 +16,9 @@
 
 <!-- Header -->
 <header id="header">
-    <img src="<?= base_url('images/brasinha.svg') ?>" alt="Brasa Café Clube" class="logo">
-    <nav>
+        <a href="<?= base_url('/') ?>" class="logo-link">
+            <img src="<?= base_url('images/brasinha.svg') ?>" alt="Brasa Café Clube" class="logo">
+        </a>    <nav>
         <a href="<?= base_url('/') ?>#como-funciona">Como funciona</a>
         <a href="<?= base_url('/') ?>#perfis">Perfis</a>
         <a href="<?= base_url('/planos') ?>">Planos</a>
@@ -86,6 +88,7 @@
                     <!-- Gold -->
                     <div class="plan-card planos-carousel-item" data-idx="1">
                         <span class="plan-badge">Mais Popular</span>
+                        
                         <h3 class="plan-name">Gold</h3>
                         <p class="plan-tagline">Dobrou a dose, dobrou a felicidade.</p>
                         <div class="plan-price">R$89</div>

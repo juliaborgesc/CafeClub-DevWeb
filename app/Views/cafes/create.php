@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Novo Café</title>
+    <link rel="icon" href="<?= base_url('images/logo.svg') ?>" type="image/svg+xml">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
