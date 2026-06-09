@@ -39,7 +39,7 @@
         </div>
         <?php endif; ?>
 
-        <form action="<?= base_url('/quiz/responder') ?>" method="post">
+        <form action="<?= base_url($numero == $total ? '/quiz/calculando' : '/quiz/responder') ?>" method="post">
             <input type="hidden" name="numero" value="<?= $numero ?>">
             <div class="question-options">
                 <?php foreach ($pergunta['opcoes'] as $valor => $opcao): ?>

@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="<?= base_url('css/quiz.css') ?>">
-
 <?php
 $metodos = [
     'COADOR'          => 'coador',
@@ -116,7 +114,7 @@ $dados     = $perfis[$perfilKey] ?? $perfis['equilibrado'];
     <section class="result-reveal-card">
 
         <div class="result-icon">
-            <i class="<?= $dados['icone'] ?>"></i>
+            <img src="<?= base_url('images/perfis/' . $perfilKey . '.svg') ?>" alt="<?= htmlspecialchars($dados['nome']) ?>">
         </div>
 
         <p class="result-label">Seu perfil é</p>
@@ -134,7 +132,7 @@ $dados     = $perfis[$perfilKey] ?? $perfis['equilibrado'];
         </div>
 
         <a href="<?= base_url('/planos') ?>" class="result-cta">
-            Escolher meu plano
+            Assinar agora
             <i class="hgi-stroke hgi-arrow-right-01"></i>
         </a>
 

@@ -5,6 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /** @var RouteCollection $routes */
 
 $routes->get('/', 'Home::index');
+$routes->get('planos', 'Home::planos');
 
 
 // CLIENTES
@@ -42,8 +43,8 @@ $routes->post('/cafes/update/(:num)', 'CafesController::update/$1');
 $routes->get('/cafes/excluir/(:num)', 'CafesController::excluir/$1');
 
 // QUIZ
-// QUIZ
 $routes->get('/quiz', 'QuizController::index');
 $routes->get('/quiz/pergunta/(:num)', 'QuizController::pergunta/$1');
 $routes->post('/quiz/responder', 'QuizController::responder');
 $routes->get('/quiz/resultado', 'QuizController::resultado');
+$routes->match(['get', 'post'], 'quiz/calculando', 'QuizController::calculando');

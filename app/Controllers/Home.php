@@ -8,4 +8,10 @@ class Home extends BaseController
     {
         return view('home/index');
     }
+    public function planos()
+    {
+    return view('home/planos');
+    }
+    
 }
+

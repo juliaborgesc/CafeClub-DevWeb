@@ -193,7 +193,7 @@ private array $perguntas = [
 
             $this->calcularResultado();
 
-            return redirect()->to('/quiz/resultado');
+            return redirect()->to('/quiz/calculando');
         }
 
         return redirect()->to('/quiz/pergunta/' . $proxima);
@@ -263,5 +263,10 @@ private array $perguntas = [
             'PRENSA_FRANCESA' => 'GROSSA',
             default => 'MEDIA',
         };
+    }
+
+    public function calculando()
+    {
+        return view('quiz/calculando');
     }
 }
