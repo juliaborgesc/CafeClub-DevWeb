@@ -14,7 +14,11 @@ class CafeModel extends Model
         'nome',
         'origem',
         'descricao',
-        'perfil'
+        'perfil',
+        'torra',
+        'intensidade',
+        'forma_envio',
+        'moagem'
     ];
 
     protected $returnType = 'array';

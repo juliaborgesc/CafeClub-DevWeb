@@ -17,7 +17,10 @@ class ClientesModel extends Model
         'nome',
         'email',
         'telefone',
-        'perfil'
+        'perfil',
+        'metodo_preparo',
+        'forma_envio',
+        'moagem',
     ];
 
     protected bool $allowEmptyInserts = false;
