@@ -13,16 +13,18 @@ class ClientesModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
 
-    protected $allowedFields    = [
+    protected $allowedFields = [
         'nome',
         'email',
+        'senha',
         'telefone',
         'perfil',
         'metodo_preparo',
         'forma_envio',
         'moagem',
+        'plano',
+        'plano_ativo',
     ];
-
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
 
@@ -30,7 +32,7 @@ class ClientesModel extends Model
     protected array $castHandlers = [];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

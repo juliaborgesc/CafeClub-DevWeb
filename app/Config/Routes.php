@@ -48,3 +48,11 @@ $routes->get('/quiz/pergunta/(:num)', 'QuizController::pergunta/$1');
 $routes->post('/quiz/responder', 'QuizController::responder');
 $routes->match(['get', 'post'], '/quiz/calculando', 'QuizController::calculando');
 $routes->get('/quiz/resultado', 'QuizController::resultado');
+
+// AUTH
+$routes->get('/cadastro', 'AuthController::cadastro');
+$routes->post('/cadastro', 'AuthController::salvarCadastro');
+$routes->get('/login', 'AuthController::login');
+$routes->post('/login', 'AuthController::autenticar');
+$routes->get('/logout', 'AuthController::logout');
+
