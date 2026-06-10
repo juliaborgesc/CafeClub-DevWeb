@@ -52,13 +52,6 @@ class AuthController extends BaseController
                         ->with('erros', $this->validator->getErrors());
                 }
 
-
-        if (!$this->validate($regras)) {
-            return redirect()->back()
-                ->withInput()
-                ->with('erros', $this->validator->getErrors());
-        }
-
         $clientesModel = new ClientesModel();
 
         $clientesModel->insert([
@@ -96,8 +89,7 @@ class AuthController extends BaseController
             'cliente_nome' => $cliente['nome'],
         ]);
 
-        return redirect()->to('/quiz');
-    }
+        return redirect()->to('/')->with('sucesso', 'Login realizado com sucesso!');    }
 
     public function logout()
     {

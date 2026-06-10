@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brasa Café Clube | Seu Café do Seu Jeito</title>
     <meta name="description" content="Clube de assinatura de café especial. Descubra seu perfil sensorial e receba cafés selecionados todo mês.">
-    <link rel="icon" href="<?= base_url('images/logo.svg') ?>" type="image/svg+xml">
+    <link rel="icon" href="<?= base_url('images/brasinha.svg') ?>" type="image/svg+xml">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,33 +14,87 @@
     <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
 </head>
 <body>
+<?php
+$clienteLogado = session()->get('cliente_id');
+$clienteNome = session()->get('cliente_nome');
+$primeiroNome = $clienteNome ? explode(' ', trim($clienteNome))[0] : null;
+?>
 
     <!-- Header -->
     <header id="header">
-        <img src="<?= base_url('images/brasinha.svg') ?>" alt="Brasa Cafe Clube" class="logo">
+        <a href="<?= base_url('/') ?>" class="logo-link" aria-label="Voltar para a página inicial">
+            <img src="<?= base_url('images/brasinha.svg') ?>" alt="Brasa Café Clube" class="logo">
+        </a>
+
         <nav>
             <a href="#como-funciona">Como funciona</a>
             <a href="#perfis">Perfis</a>
             <a href="#planos">Planos</a>
             <a href="#faq">FAQ</a>
         </nav>
-        <a href="#planos" class="btn btn-primary">Assinar Agora</a>
-        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+
+        <div class="site-auth-actions">
+            <?php if ($clienteLogado): ?>
+                <span class="user-pill">
+                    <i class="hgi-stroke hgi-user-circle"></i>
+                    Olá, <?= esc($primeiroNome) ?>
+                </span>
+
+                <a href="<?= base_url('/quiz') ?>" class="btn btn-primary">Fazer Quiz</a>
+
+                <a href="<?= base_url('/logout') ?>" class="btn btn-ghost">Sair</a>
+            <?php else: ?>
+                <a href="<?= base_url('/login') ?>" class="login-link">Entrar</a>
+
+                <a href="<?= base_url('/cadastro') ?>" class="btn btn-primary">Criar conta</a>
+            <?php endif; ?>
+        </div>
+
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Abrir menu">
             <i class="hgi-stroke hgi-menu-02"></i>
         </button>
     </header>
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <button class="mobile-menu-close" onclick="toggleMobileMenu()">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Fechar menu">
             <i class="hgi-stroke hgi-cancel-01"></i>
         </button>
+
+        <?php if ($clienteLogado): ?>
+            <div class="mobile-user-box">
+                <span>Olá, <?= esc($primeiroNome) ?></span>
+                <small>Bem-vindo de volta ao Brasa</small>
+            </div>
+        <?php endif; ?>
+
         <a href="#como-funciona" onclick="toggleMobileMenu()">Como funciona</a>
         <a href="#perfis" onclick="toggleMobileMenu()">Perfis</a>
         <a href="#planos" onclick="toggleMobileMenu()">Planos</a>
         <a href="#faq" onclick="toggleMobileMenu()">FAQ</a>
-        <a href="#planos" class="btn btn-primary" onclick="toggleMobileMenu()">Assinar Agora</a>
+
+        <?php if ($clienteLogado): ?>
+            <a href="<?= base_url('/quiz') ?>" class="btn btn-primary" onclick="toggleMobileMenu()">Fazer Quiz</a>
+            <a href="<?= base_url('/logout') ?>" class="mobile-logout" onclick="toggleMobileMenu()">Sair da conta</a>
+        <?php else: ?>
+            <a href="<?= base_url('/login') ?>" onclick="toggleMobileMenu()">Entrar</a>
+            <a href="<?= base_url('/cadastro') ?>" class="btn btn-primary" onclick="toggleMobileMenu()">Criar conta</a>
+        <?php endif; ?>
     </div>
+
+    <?php if (session()->getFlashdata('sucesso')): ?>
+        <div class="home-flash home-flash-success">
+            <i class="hgi-stroke hgi-checkmark-circle-02"></i>
+            <?= esc(session()->getFlashdata('sucesso')) ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('erro')): ?>
+        <div class="home-flash home-flash-error">
+            <i class="hgi-stroke hgi-alert-circle"></i>
+            <?= esc(session()->getFlashdata('erro')) ?>
+        </div>
+    <?php endif; ?>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -64,13 +118,18 @@
                     Descubra seu perfil sensorial e receba cafés especiais selecionados especialmente para você.
                 </p>
                 <div class="hero-cta">
-                    <a href="#planos" class="btn btn-primary">Assinar Agora</a>
-                    <a href="#como-funciona" class="btn btn-outline" style="border-color: white; color: white;">Como funciona</a>
+                    <?php if ($clienteLogado): ?>
+                        <a href="<?= base_url('/quiz') ?>" class="btn btn-primary">Fazer meu quiz</a>
+                        <a href="#planos" class="btn btn-outline" style="border-color: white; color: white;">Ver planos</a>
+                    <?php else: ?>
+                        <a href="<?= base_url('/cadastro') ?>" class="btn btn-primary">Criar conta e fazer quiz</a>
+                        <a href="<?= base_url('/login') ?>" class="btn btn-outline" style="border-color: white; color: white;">Já tenho conta</a>
+                    <?php endif; ?>
                 </div>
             </div>
 
             <div class="hero-icons">
-                <a href="#como-funciona" class="hero-icon-item">
+                <a href="<?= $clienteLogado ? base_url('/quiz') : base_url('/cadastro') ?>" class="hero-icon-item">
                     <i class="hgi-stroke hgi-quiz-02"></i>
                     <span>Faça o Quiz</span>
                 </a>
@@ -274,8 +333,8 @@
             </div>
 
             <div class="profiles-actions">
-                <a href="<?= base_url('/quiz') ?>" class="btn btn-primary profiles-btn">
-                    Faça o Quiz
+                <a href="<?= $clienteLogado ? base_url('/quiz') : base_url('/cadastro') ?>" class="btn btn-primary profiles-btn">
+                    <?= $clienteLogado ? 'Refazer o Quiz' : 'Faça o Quiz' ?>
                 </a>
 
                 <a href="<?= base_url('/perfis') ?>" class="profiles-more-link">
@@ -316,7 +375,7 @@
                                 <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
                                 <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
                             </ul>
-                            <a href="<?= base_url('/assinar/basico') ?>" class="btn btn-outline plan-cta">Assinar agora</a>
+                            <a href="<?= $clienteLogado ? base_url('/quiz') : base_url('/cadastro') ?>" class="btn btn-outline plan-cta">Assinar agora</a>
                         </div>
 
                         <!-- Gold -->
@@ -335,7 +394,7 @@
                                 <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
                                 <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
                             </ul>
-                            <a href="<?= base_url('/assinar/gold') ?>" class="btn btn-primary plan-cta">Assinar agora</a>
+                            <a href="<?= $clienteLogado ? base_url('/quiz') : base_url('/cadastro') ?>" class="btn btn-primary plan-cta">Assinar agora</a>
                         </div>
 
                         <!-- Premium -->
@@ -355,7 +414,7 @@
                                 <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
                                 <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
                             </ul>
-                            <a href="<?= base_url('/assinar/premium') ?>" class="btn btn-secondary plan-cta">Assinar agora</a>
+                            <a href="<?= $clienteLogado ? base_url('/quiz') : base_url('/cadastro') ?>" class="btn btn-secondary plan-cta">Assinar agora</a>
                         </div>
 
                     </div><!-- /.planos-carousel-track -->
@@ -474,7 +533,11 @@
         <div class="container">
             <h2 class="section-title font-display">Descubra Seu Café Ideal</h2>
             <p class="section-subtitle">Comece sua jornada sensorial hoje mesmo e transforme sua relação com o café.</p>
-            <a href="#planos" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.25rem 3rem;">Assinar Agora</a>
+            <?php if ($clienteLogado): ?>
+                <a href="<?= base_url('/quiz') ?>" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.25rem 3rem;">Fazer meu quiz</a>
+            <?php else: ?>
+                <a href="<?= base_url('/cadastro') ?>" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.25rem 3rem;">Criar conta e começar</a>
+            <?php endif; ?>
         </div>
     </section>
 

@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\ClientesModel;
+
 class QuizController extends BaseController
 {
     private array $perguntas = [
@@ -149,6 +151,7 @@ class QuizController extends BaseController
                 ['icone' => 'hgi-stroke hgi-sun-01',    'texto' => 'Matinal'],
             ],
         ],
+
         'frutado' => [
             'nome'   => 'Frutado',
             'accent' => '#59a96a',
@@ -159,6 +162,7 @@ class QuizController extends BaseController
                 ['icone' => 'hgi-stroke hgi-leaf-01',      'texto' => 'Delicado'],
             ],
         ],
+
         'intenso' => [
             'nome'   => 'Intenso',
             'accent' => '#e28413',
@@ -169,6 +173,7 @@ class QuizController extends BaseController
                 ['icone' => 'hgi-stroke hgi-moon-02', 'texto' => 'Noturno'],
             ],
         ],
+
         'equilibrado' => [
             'nome'   => 'Equilibrado',
             'accent' => '#788aa3',
@@ -179,12 +184,13 @@ class QuizController extends BaseController
                 ['icone' => 'hgi-stroke hgi-star',      'texto' => 'Clássico'],
             ],
         ],
+
         'explorador' => [
             'nome'   => 'Explorador',
             'accent' => '#92614a',
             'desc'   => 'O café pra você é descoberta. Você quer o inusitado — o fermentado anaeróbico, o processo experimental, o que ninguém ainda provou. Cada mês vai ser uma surpresa diferente, e você vai adorar cada gole.',
             'badges' => [
-                ['icone' => 'hgi-stroke hgi-stars',  'texto' => 'Curioso'],
+                ['icone' => 'hgi-stroke hgi-stars',   'texto' => 'Curioso'],
                 ['icone' => 'hgi-stroke hgi-compass', 'texto' => 'Aventureiro'],
                 ['icone' => 'hgi-stroke hgi-idea-01', 'texto' => 'Ousado'],
             ],
@@ -198,12 +204,14 @@ class QuizController extends BaseController
             'desc'  => 'Perfeito pra você — 1 pacote de 250g por mês, curadoria pelo seu perfil e frete grátis.',
             'url'   => '/assinar/basico',
         ],
+
         'gold' => [
             'nome'  => 'Gold',
             'preco' => 'R$89',
             'desc'  => 'O plano certo pra você — 2 pacotes por mês, nota de sabor personalizada e acesso a cafés exclusivos.',
             'url'   => '/assinar/gold',
         ],
+
         'premium' => [
             'nome'  => 'Premium',
             'preco' => 'R$129',
@@ -230,12 +238,21 @@ class QuizController extends BaseController
 
     public function index()
     {
+        if ($redirect = $this->exigirLogin()) {
+            return $redirect;
+        }
+
         $this->limparSessaoQuiz();
+
         return view('quiz/index');
     }
 
     public function pergunta($numero)
     {
+        if ($redirect = $this->exigirLogin()) {
+            return $redirect;
+        }
+
         $numero = (int) $numero;
 
         if ($numero === 1) {
@@ -247,14 +264,18 @@ class QuizController extends BaseController
         }
 
         return view('quiz/pergunta', [
-            'numero'  => $numero,
-            'total'   => count($this->perguntas),
+            'numero'   => $numero,
+            'total'    => count($this->perguntas),
             'pergunta' => $this->perguntas[$numero],
         ]);
     }
 
     public function responder()
     {
+        if ($redirect = $this->exigirLogin()) {
+            return $redirect;
+        }
+
         $numero   = (int) $this->request->getPost('numero');
         $resposta = $this->request->getPost('resposta');
 
@@ -263,21 +284,24 @@ class QuizController extends BaseController
         }
 
         if (empty($resposta) || !isset($this->perguntas[$numero]['opcoes'][$resposta])) {
-            return redirect()->back()->with('erro', 'Selecione uma opção válida.');
+            return redirect()->back()
+                ->with('erro', 'Selecione uma opção válida.');
         }
 
         if ($numero === 1) {
             $this->limparSessaoQuiz();
         }
 
-        $respostas          = session()->get('respostas_quiz') ?? [];
+        $respostas = session()->get('respostas_quiz') ?? [];
         $respostas[$numero] = $resposta;
+
         session()->set('respostas_quiz', $respostas);
 
         $proxima = $numero + 1;
 
         if ($proxima > count($this->perguntas)) {
             $this->calcularResultado();
+
             return redirect()->to('/quiz/calculando');
         }
 
@@ -286,6 +310,10 @@ class QuizController extends BaseController
 
     public function calculando()
     {
+        if ($redirect = $this->exigirLogin()) {
+            return $redirect;
+        }
+
         if (!session()->get('perfil_quiz')) {
             $this->calcularResultado();
         }
@@ -299,6 +327,10 @@ class QuizController extends BaseController
 
     public function resultado()
     {
+        if ($redirect = $this->exigirLogin()) {
+            return $redirect;
+        }
+
         if (!session()->get('perfil_quiz')) {
             $this->calcularResultado();
         }
@@ -313,14 +345,14 @@ class QuizController extends BaseController
         $formaEnvio = session()->get('forma_envio');
         $moagem     = session()->get('moagem');
 
-        $dados      = $this->perfis[$perfilKey]  ?? $this->perfis['equilibrado'];
-        $dadosPlano = $this->planos[$planoKey]   ?? $this->planos['gold'];
+        $dados      = $this->perfis[$perfilKey] ?? $this->perfis['equilibrado'];
+        $dadosPlano = $this->planos[$planoKey] ?? $this->planos['gold'];
 
         $metodoLabel = $this->metodos[$metodo ?? ''] ?? null;
         $moagemLabel = $this->moagens[$moagem ?? ''] ?? null;
 
-        // Monta o trecho de método/moagem no texto
         $textoMetodo = '';
+
         if ($metodoLabel) {
             if ($formaEnvio === 'MOIDO' && $moagemLabel) {
                 $textoMetodo = " Como você usa {$metodoLabel}, a moagem ideal pra você é <strong>{$moagemLabel}</strong> — assim você vai extrair tudo que o grão tem a oferecer.";
@@ -349,26 +381,35 @@ class QuizController extends BaseController
             'explorador'  => 0,
         ];
 
+        $metodo = null;
+        $formaEnvio = null;
+
         foreach ($respostas as $numero => $resposta) {
-            if (!isset($this->perguntas[$numero])) continue;
+            if (!isset($this->perguntas[$numero])) {
+                continue;
+            }
 
             $pergunta = $this->perguntas[$numero];
 
-            if (!isset($pergunta['opcoes'][$resposta])) continue;
+            if (!isset($pergunta['opcoes'][$resposta])) {
+                continue;
+            }
 
             $opcao = $pergunta['opcoes'][$resposta];
 
             if (($pergunta['tipo'] ?? '') === 'metodo') {
-                session()->set('metodo_preparo', $opcao['metodo']);
+                $metodo = $opcao['metodo'];
                 continue;
             }
 
             if (($pergunta['tipo'] ?? '') === 'envio') {
-                session()->set('forma_envio', $resposta);
+                $formaEnvio = $resposta;
                 continue;
             }
 
-            if (!isset($opcao['pontos'])) continue;
+            if (!isset($opcao['pontos'])) {
+                continue;
+            }
 
             foreach ($opcao['pontos'] as $perfil => $pontos) {
                 if (isset($pontuacao[$perfil])) {
@@ -378,19 +419,16 @@ class QuizController extends BaseController
         }
 
         arsort($pontuacao);
+
         $perfilFinal = array_key_first($pontuacao);
 
-        // Recomendação de plano pela frequência (pergunta 7)
         $respostaFrequencia = $respostas[7] ?? null;
 
-        $planoRecomendado = match(true) {
+        $planoRecomendado = match (true) {
             $respostaFrequencia === 'A' => 'basico',
             $respostaFrequencia === 'D' => 'premium',
             default                     => 'gold',
         };
-
-        $formaEnvio = session()->get('forma_envio');
-        $metodo     = session()->get('metodo_preparo');
 
         $moagem = $formaEnvio === 'MOIDO'
             ? $this->calcularMoagem($metodo)
@@ -399,18 +437,31 @@ class QuizController extends BaseController
         session()->set([
             'perfil_quiz'       => $perfilFinal,
             'plano_recomendado' => $planoRecomendado,
+            'metodo_preparo'    => $metodo,
+            'forma_envio'       => $formaEnvio,
             'moagem'            => $moagem,
         ]);
+
+        if (session()->get('cliente_id')) {
+            $clientesModel = new ClientesModel();
+
+            $clientesModel->update(session()->get('cliente_id'), [
+                'perfil'         => $perfilFinal,
+                'metodo_preparo' => $metodo,
+                'forma_envio'    => $formaEnvio,
+                'moagem'         => $moagem,
+            ]);
+        }
     }
 
     private function calcularMoagem($metodo)
     {
         return match ($metodo) {
-            'ESPRESSO'                => 'FINA',
-            'V60', 'AEROPRESS'        => 'MEDIA_FINA',
-            'COADOR', 'MOKA'          => 'MEDIA',
-            'PRENSA_FRANCESA'         => 'GROSSA',
-            default                   => null,
+            'ESPRESSO'        => 'FINA',
+            'V60', 'AEROPRESS' => 'MEDIA_FINA',
+            'COADOR', 'MOKA'  => 'MEDIA',
+            'PRENSA_FRANCESA' => 'GROSSA',
+            default           => null,
         };
     }
 
@@ -424,5 +475,15 @@ class QuizController extends BaseController
             'moagem',
             'plano_recomendado',
         ]);
+    }
+
+    private function exigirLogin()
+    {
+        if (!session()->get('cliente_id')) {
+            return redirect()->to('/login')
+                ->with('erro', 'Faça login para responder ao quiz e salvar seu perfil sensorial.');
+        }
+
+        return null;
     }
 }

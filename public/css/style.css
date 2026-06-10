@@ -2136,3 +2136,158 @@ footer {
 .profiles-more-link:hover span {
     transform: translateX(4px);
 }
+
+/* =========================================================
+   HOME — LOGIN / USUÁRIO LOGADO
+   ========================================================= */
+
+.logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.site-auth-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.user-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1.5px solid rgba(79, 51, 40, 0.14);
+    border-radius: 999px;
+    background: rgba(250, 245, 233, 0.78);
+    color: var(--primary-dark);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.user-pill i {
+    font-size: 18px;
+    color: var(--accent);
+}
+
+.login-link {
+    color: var(--primary-dark);
+    font-size: 14px;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+}
+
+.login-link:hover {
+    color: var(--accent);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--primary-dark);
+    border: 1.5px solid rgba(79, 51, 40, 0.18);
+}
+
+.btn-ghost:hover {
+    background: var(--primary-dark);
+    color: var(--text-light);
+    transform: scale(1.03);
+}
+
+.home-flash {
+    position: fixed;
+    top: 96px;
+    right: 24px;
+    z-index: 1100;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    max-width: min(420px, calc(100vw - 48px));
+    padding: 14px 18px;
+    border-radius: 18px;
+    background: rgba(250, 245, 233, 0.94);
+    border: 1.5px solid rgba(79, 51, 40, 0.10);
+    color: var(--primary-dark);
+    box-shadow: 0 18px 42px rgba(79, 51, 40, 0.16);
+    backdrop-filter: blur(10px);
+    font-size: 14px;
+    font-weight: 800;
+    animation: homeFlashIn 0.35s ease both;
+}
+
+.home-flash i {
+    font-size: 18px;
+    color: var(--accent);
+}
+
+.home-flash-success i {
+    color: var(--secondary-green);
+}
+
+.home-flash-error {
+    border-color: rgba(176, 56, 46, 0.22);
+}
+
+.home-flash-error i {
+    color: #b0382e;
+}
+
+@keyframes homeFlashIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mobile-user-box {
+    width: 100%;
+    padding: 18px 20px;
+    border-radius: 22px;
+    background: rgba(226, 132, 19, 0.12);
+    border: 1.5px solid rgba(226, 132, 19, 0.22);
+    color: var(--primary-dark);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.mobile-user-box span {
+    display: block;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.mobile-user-box small {
+    display: block;
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.72;
+}
+
+.mobile-logout {
+    color: #b0382e !important;
+    font-weight: 900 !important;
+}
+
+@media (max-width: 768px) {
+    .site-auth-actions {
+        display: none;
+    }
+
+    .home-flash {
+        top: 86px;
+        left: 16px;
+        right: 16px;
+        justify-content: center;
+    }
+}
+
