@@ -118,12 +118,12 @@ class QuizController extends BaseController
         11 => [
             'texto' => 'Como você costuma preparar seu café?',
             'opcoes' => [
-                'coador' => ['texto' => 'Coador de papel ou pano', 'metodo' => 'COADOR'],
-                'v60' => ['texto' => 'V60', 'metodo' => 'V60'],
-                'espresso' => ['texto' => 'Espresso', 'metodo' => 'ESPRESSO'],
-                'moka' => ['texto' => 'Moka italiana', 'metodo' => 'MOKA'],
+                'coador'    => ['texto' => 'Coador de papel ou pano', 'metodo' => 'COADOR'],
+                'v60'       => ['texto' => 'V60', 'metodo' => 'V60'],
+                'espresso'  => ['texto' => 'Espresso', 'metodo' => 'ESPRESSO'],
+                'moka'      => ['texto' => 'Moka italiana', 'metodo' => 'MOKA'],
                 'aeropress' => ['texto' => 'Aeropress', 'metodo' => 'AEROPRESS'],
-                'prensa' => ['texto' => 'Prensa francesa', 'metodo' => 'PRENSA_FRANCESA'],
+                'prensa'    => ['texto' => 'Prensa francesa', 'metodo' => 'PRENSA_FRANCESA'],
             ],
             'tipo' => 'metodo',
         ],
@@ -138,10 +138,99 @@ class QuizController extends BaseController
         ],
     ];
 
+    private array $perfis = [
+        'iniciante' => [
+            'nome'   => 'Iniciante',
+            'accent' => '#c8845a',
+            'desc'   => 'Você busca conforto na xícara. Sem complicação, sem amargor forte — só aquele café gostoso e acolhedor que aquece o dia. Os melhores grãos pra você têm notas de chocolate ao leite, caramelo e castanhas, com corpo suave e acidez baixa que não assustam o paladar.',
+            'badges' => [
+                ['icone' => 'hgi-stroke hgi-coffee-01', 'texto' => 'Suave'],
+                ['icone' => 'hgi-stroke hgi-heart',     'texto' => 'Acolhedor'],
+                ['icone' => 'hgi-stroke hgi-sun-01',    'texto' => 'Matinal'],
+            ],
+        ],
+        'frutado' => [
+            'nome'   => 'Frutado',
+            'accent' => '#59a96a',
+            'desc'   => 'Seu paladar ama vivacidade. Você percebe quando algo tem um gostinho diferente — e gosta disso. Cafés com notas de frutas vermelhas, cítricos e florais, com acidez vibrante e final elegante, foram feitos pra você.',
+            'badges' => [
+                ['icone' => 'hgi-stroke hgi-lemon',        'texto' => 'Frutado'],
+                ['icone' => 'hgi-stroke hgi-lightning-02', 'texto' => 'Vibrante'],
+                ['icone' => 'hgi-stroke hgi-leaf-01',      'texto' => 'Delicado'],
+            ],
+        ],
+        'intenso' => [
+            'nome'   => 'Intenso',
+            'accent' => '#e28413',
+            'desc'   => 'Sem força não tem graça. Você quer uma xícara que deixe impressão — que você sinta do primeiro gole ao último. Cafés encorpados, com notas de cacau amargo, especiarias e um final longo e marcante são o seu território.',
+            'badges' => [
+                ['icone' => 'hgi-stroke hgi-fire-02', 'texto' => 'Intenso'],
+                ['icone' => 'hgi-stroke hgi-flash',   'texto' => 'Encorpado'],
+                ['icone' => 'hgi-stroke hgi-moon-02', 'texto' => 'Noturno'],
+            ],
+        ],
+        'equilibrado' => [
+            'nome'   => 'Equilibrado',
+            'accent' => '#788aa3',
+            'desc'   => 'Você aprecia o melhor dos dois mundos. Nem suave demais, nem intenso demais — uma xícara limpa, bem feita, com doçura e acidez em harmonia, que combina com qualquer momento do dia.',
+            'badges' => [
+                ['icone' => 'hgi-stroke hgi-coffee-02', 'texto' => 'Balanceado'],
+                ['icone' => 'hgi-stroke hgi-sun-02',    'texto' => 'Versátil'],
+                ['icone' => 'hgi-stroke hgi-star',      'texto' => 'Clássico'],
+            ],
+        ],
+        'explorador' => [
+            'nome'   => 'Explorador',
+            'accent' => '#92614a',
+            'desc'   => 'O café pra você é descoberta. Você quer o inusitado — o fermentado anaeróbico, o processo experimental, o que ninguém ainda provou. Cada mês vai ser uma surpresa diferente, e você vai adorar cada gole.',
+            'badges' => [
+                ['icone' => 'hgi-stroke hgi-stars',  'texto' => 'Curioso'],
+                ['icone' => 'hgi-stroke hgi-compass', 'texto' => 'Aventureiro'],
+                ['icone' => 'hgi-stroke hgi-idea-01', 'texto' => 'Ousado'],
+            ],
+        ],
+    ];
+
+    private array $planos = [
+        'basico' => [
+            'nome'  => 'Básico',
+            'preco' => 'R$49',
+            'desc'  => 'Perfeito pra você — 1 pacote de 250g por mês, curadoria pelo seu perfil e frete grátis.',
+            'url'   => '/assinar/basico',
+        ],
+        'gold' => [
+            'nome'  => 'Gold',
+            'preco' => 'R$89',
+            'desc'  => 'O plano certo pra você — 2 pacotes por mês, nota de sabor personalizada e acesso a cafés exclusivos.',
+            'url'   => '/assinar/gold',
+        ],
+        'premium' => [
+            'nome'  => 'Premium',
+            'preco' => 'R$129',
+            'desc'  => 'Feito pra quem leva café a sério — 3 pacotes, brinde mensal surpresa e acesso VIP a lançamentos.',
+            'url'   => '/assinar/premium',
+        ],
+    ];
+
+    private array $metodos = [
+        'COADOR'          => 'coador',
+        'V60'             => 'V60',
+        'ESPRESSO'        => 'espresso',
+        'MOKA'            => 'moka italiana',
+        'AEROPRESS'       => 'Aeropress',
+        'PRENSA_FRANCESA' => 'prensa francesa',
+    ];
+
+    private array $moagens = [
+        'FINA'       => 'fina',
+        'MEDIA_FINA' => 'média-fina',
+        'MEDIA'      => 'média',
+        'GROSSA'     => 'grossa',
+    ];
+
     public function index()
     {
         $this->limparSessaoQuiz();
-
         return view('quiz/index');
     }
 
@@ -158,50 +247,37 @@ class QuizController extends BaseController
         }
 
         return view('quiz/pergunta', [
-            'numero' => $numero,
-            'total' => count($this->perguntas),
+            'numero'  => $numero,
+            'total'   => count($this->perguntas),
             'pergunta' => $this->perguntas[$numero],
         ]);
     }
 
     public function responder()
     {
-        $numero = (int) $this->request->getPost('numero');
+        $numero   = (int) $this->request->getPost('numero');
         $resposta = $this->request->getPost('resposta');
 
         if (!isset($this->perguntas[$numero])) {
             return redirect()->to('/quiz');
         }
 
-        if (
-            empty($resposta) ||
-            !isset($this->perguntas[$numero]['opcoes'][$resposta])
-        ) {
-            return redirect()->back()
-                ->with('erro', 'Selecione uma opção válida.');
+        if (empty($resposta) || !isset($this->perguntas[$numero]['opcoes'][$resposta])) {
+            return redirect()->back()->with('erro', 'Selecione uma opção válida.');
         }
 
-        // Limpa só quando começa o quiz de novo pela pergunta 1
         if ($numero === 1) {
-            session()->remove([
-                'respostas_quiz',
-                'perfil_quiz',
-                'metodo_preparo',
-                'forma_envio',
-                'moagem'
-            ]);
+            $this->limparSessaoQuiz();
         }
 
-        $respostas = session()->get('respostas_quiz') ?? [];
+        $respostas          = session()->get('respostas_quiz') ?? [];
         $respostas[$numero] = $resposta;
-
         session()->set('respostas_quiz', $respostas);
 
         $proxima = $numero + 1;
 
         if ($proxima > count($this->perguntas)) {
             $this->calcularResultado();
-
             return redirect()->to('/quiz/calculando');
         }
 
@@ -215,7 +291,7 @@ class QuizController extends BaseController
         }
 
         if (!session()->get('perfil_quiz')) {
-             return redirect()->to('/quiz');
+            return redirect()->to('/quiz');
         }
 
         return view('quiz/calculando');
@@ -231,11 +307,33 @@ class QuizController extends BaseController
             return redirect()->to('/quiz');
         }
 
+        $perfilKey  = session()->get('perfil_quiz');
+        $planoKey   = session()->get('plano_recomendado') ?? 'gold';
+        $metodo     = session()->get('metodo_preparo');
+        $formaEnvio = session()->get('forma_envio');
+        $moagem     = session()->get('moagem');
+
+        $dados      = $this->perfis[$perfilKey]  ?? $this->perfis['equilibrado'];
+        $dadosPlano = $this->planos[$planoKey]   ?? $this->planos['gold'];
+
+        $metodoLabel = $this->metodos[$metodo ?? ''] ?? null;
+        $moagemLabel = $this->moagens[$moagem ?? ''] ?? null;
+
+        // Monta o trecho de método/moagem no texto
+        $textoMetodo = '';
+        if ($metodoLabel) {
+            if ($formaEnvio === 'MOIDO' && $moagemLabel) {
+                $textoMetodo = " Como você usa {$metodoLabel}, a moagem ideal pra você é <strong>{$moagemLabel}</strong> — assim você vai extrair tudo que o grão tem a oferecer.";
+            } else {
+                $textoMetodo = " Como você prefere receber em grãos, é só moer na hora do preparo no {$metodoLabel} pra garantir o frescor máximo.";
+            }
+        }
+
         return view('quiz/resultado', [
-            'perfil' => session()->get('perfil_quiz'),
-            'metodo_preparo' => session()->get('metodo_preparo'),
-            'forma_envio' => session()->get('forma_envio'),
-            'moagem' => session()->get('moagem'),
+            'perfilKey'   => $perfilKey,
+            'dados'       => $dados,
+            'dadosPlano'  => $dadosPlano,
+            'textoMetodo' => $textoMetodo,
         ]);
     }
 
@@ -244,23 +342,19 @@ class QuizController extends BaseController
         $respostas = session()->get('respostas_quiz') ?? [];
 
         $pontuacao = [
-            'iniciante' => 0,
-            'frutado' => 0,
-            'intenso' => 0,
+            'iniciante'   => 0,
+            'frutado'     => 0,
+            'intenso'     => 0,
             'equilibrado' => 0,
-            'explorador' => 0,
+            'explorador'  => 0,
         ];
 
         foreach ($respostas as $numero => $resposta) {
-            if (!isset($this->perguntas[$numero])) {
-                continue;
-            }
+            if (!isset($this->perguntas[$numero])) continue;
 
             $pergunta = $this->perguntas[$numero];
 
-            if (!isset($pergunta['opcoes'][$resposta])) {
-                continue;
-            }
+            if (!isset($pergunta['opcoes'][$resposta])) continue;
 
             $opcao = $pergunta['opcoes'][$resposta];
 
@@ -274,9 +368,7 @@ class QuizController extends BaseController
                 continue;
             }
 
-            if (!isset($opcao['pontos'])) {
-                continue;
-            }
+            if (!isset($opcao['pontos'])) continue;
 
             foreach ($opcao['pontos'] as $perfil => $pontos) {
                 if (isset($pontuacao[$perfil])) {
@@ -286,30 +378,39 @@ class QuizController extends BaseController
         }
 
         arsort($pontuacao);
-
         $perfilFinal = array_key_first($pontuacao);
 
-        $metodo = session()->get('metodo_preparo');
+        // Recomendação de plano pela frequência (pergunta 7)
+        $respostaFrequencia = $respostas[7] ?? null;
+
+        $planoRecomendado = match(true) {
+            $respostaFrequencia === 'A' => 'basico',
+            $respostaFrequencia === 'D' => 'premium',
+            default                     => 'gold',
+        };
+
         $formaEnvio = session()->get('forma_envio');
+        $metodo     = session()->get('metodo_preparo');
 
         $moagem = $formaEnvio === 'MOIDO'
             ? $this->calcularMoagem($metodo)
             : null;
 
         session()->set([
-            'perfil_quiz' => $perfilFinal,
-            'moagem' => $moagem,
+            'perfil_quiz'       => $perfilFinal,
+            'plano_recomendado' => $planoRecomendado,
+            'moagem'            => $moagem,
         ]);
     }
 
     private function calcularMoagem($metodo)
     {
         return match ($metodo) {
-            'ESPRESSO' => 'FINA',
-            'V60', 'AEROPRESS' => 'MEDIA_FINA',
-            'COADOR', 'MOKA' => 'MEDIA',
-            'PRENSA_FRANCESA' => 'GROSSA',
-            default => null,
+            'ESPRESSO'                => 'FINA',
+            'V60', 'AEROPRESS'        => 'MEDIA_FINA',
+            'COADOR', 'MOKA'          => 'MEDIA',
+            'PRENSA_FRANCESA'         => 'GROSSA',
+            default                   => null,
         };
     }
 
@@ -321,6 +422,7 @@ class QuizController extends BaseController
             'metodo_preparo',
             'forma_envio',
             'moagem',
+            'plano_recomendado',
         ]);
     }
 }
