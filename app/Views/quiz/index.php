@@ -14,8 +14,10 @@
 </head>
 <body class="quiz-intro-body">
 
-<header class="question-header">
-    <a href="<?= base_url('/') ?>" class="question-logo">Brasa Café Clube</a>
+<header class="result-header">
+    <a href="<?= base_url('/') ?>">
+        <img src="<?= base_url('images/brasinha.svg') ?>" alt="Brasa Café Clube" class="logo">
+    </a>
 </header>
 
 <main class="quiz-intro-wrapper">

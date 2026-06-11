@@ -1,0 +1,66 @@
+        body { background: #f8f5f0; font-family: 'Inter', sans-serif; }
+        .admin-sidebar {
+            width: 240px; min-height: 100vh; background: #4f3328;
+            position: fixed; top: 0; left: 0; padding: 32px 20px;
+            display: flex; flex-direction: column; gap: 4px; z-index: 100;
+        }
+        .admin-logo {
+            color: #faf5e9; font-size: 18px; font-weight: 800;
+            letter-spacing: -0.01em; margin-bottom: 32px; text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .admin-logo img { height: 32px; }
+        .sidebar-label {
+            font-size: 10px; font-weight: 700; letter-spacing: .12em;
+            text-transform: uppercase; color: rgba(250,245,233,.35);
+            padding: 16px 12px 6px; margin: 0;
+        }
+        .sidebar-link {
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 12px; border-radius: 10px; color: rgba(250,245,233,.7);
+            text-decoration: none; font-size: 14px; font-weight: 600;
+            transition: all .18s;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            background: rgba(250,245,233,.1); color: #faf5e9;
+        }
+        .sidebar-link i { font-size: 18px; flex-shrink: 0; }
+        .admin-main { margin-left: 240px; padding: 40px; }
+        .admin-topbar {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        .admin-topbar h1 { font-size: 28px; font-weight: 800; color: #2a1a14; margin: 0; }
+        .admin-topbar span { font-size: 14px; color: #7a6a64; }
+        .stat-card {
+            background: #fff; border-radius: 20px; padding: 28px 24px;
+            border: 1px solid rgba(79,51,40,.08);
+            box-shadow: 0 2px 12px rgba(79,51,40,.06);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(79,51,40,.1); }
+        .stat-icon {
+            width: 48px; height: 48px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; margin-bottom: 16px;
+        }
+        .stat-card h3 { font-size: 32px; font-weight: 800; color: #2a1a14; margin: 0 0 4px; }
+        .stat-card p { font-size: 13px; color: #7a6a64; margin: 0; font-weight: 600; }
+        .menu-card {
+            background: #fff; border-radius: 20px; padding: 28px 24px;
+            border: 1px solid rgba(79,51,40,.08); text-decoration: none;
+            display: flex; flex-direction: column; gap: 12px;
+            box-shadow: 0 2px 12px rgba(79,51,40,.06);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .menu-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(79,51,40,.1); }
+        .menu-card-icon {
+            width: 52px; height: 52px; border-radius: 16px;
+            display: flex; align-items: center; justify-content: center; font-size: 24px;
+        }
+        .menu-card h4 { font-size: 17px; font-weight: 800; color: #2a1a14; margin: 0; }
+        .menu-card p { font-size: 13px; color: #7a6a64; margin: 0; }
+        .menu-card .go {
+            font-size: 12px; font-weight: 700; display: flex; align-items: center;
+            gap: 4px; margin-top: 4px;
+        }

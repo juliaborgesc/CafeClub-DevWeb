@@ -7,6 +7,10 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('planos', 'Home::planos');
 $routes->get('/perfis', 'Home::perfis');
+$routes->get('assinar/(:segment)', 'Home::assinar/$1');
+$routes->post('cliente/plano',     'Home::salvarPlano');
+$routes->get('/admin', 'Home::admin');
+
 
 // CLIENTES
 $routes->get('/clientes', 'ClientesController::index');
