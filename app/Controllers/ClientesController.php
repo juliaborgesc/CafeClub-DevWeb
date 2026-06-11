@@ -34,7 +34,7 @@ class ClientesController extends BaseController
             'telefone' => $this->request->getPost('telefone'),
             'perfil' => $this->request->getPost('perfil'),
             'metodo_preparo' => $this->request->getPost('metodo_preparo'),
-            'tipo_moagem' => $this->request->getPost('tipo_moagem'),
+            'moagem' => $this->request->getPost('moagem'),
             'forma_envio' => $this->request->getPost('forma_envio')
         ]);
 
@@ -56,7 +56,7 @@ class ClientesController extends BaseController
             'telefone' => $this->request->getPost('telefone'),
             'perfil' => $this->request->getPost('perfil'),
             'metodo_preparo' => $this->request->getPost('metodo_preparo'),
-            'moagem' => $this->request->getPost('tipo_moagem'),
+            'moagem' => $this->request->getPost('moagem'),
             'forma_envio' => $this->request->getPost('forma_envio')
         ]);
 
