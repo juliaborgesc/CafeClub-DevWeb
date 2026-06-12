@@ -15,17 +15,11 @@ class AddCamposCafesTable extends Migration
                 'null'       => true,
                 'after'      => 'perfil',
             ],
-            'intensidade' => [
-                'type'       => 'INT',
-                'constraint' => 2,
-                'null'       => true,
-                'after'      => 'torra',
-            ],
             'forma_envio' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 20,
                 'null'       => true,
-                'after'      => 'intensidade',
+                'after'      => 'torra',
             ],
             'moagem' => [
                 'type'       => 'VARCHAR',
@@ -41,7 +35,6 @@ class AddCamposCafesTable extends Migration
     public function down()
     {
         $this->forge->dropColumn('cafes', 'torra');
-        $this->forge->dropColumn('cafes', 'intensidade');
         $this->forge->dropColumn('cafes', 'forma_envio');
         $this->forge->dropColumn('cafes', 'moagem');
     }

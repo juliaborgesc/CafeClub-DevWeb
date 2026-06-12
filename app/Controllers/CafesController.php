@@ -31,14 +31,20 @@ class CafesController extends BaseController
     public function store()
     {
         $formaEnvio = $this->request->getPost('forma_envio');
+        $rules = $this->regrasValidacaoCafe($formaEnvio);
+
+        if (!$this->validate($rules, $this->mensagensValidacaoCafe())) {
+            return redirect()->back()
+                ->withInput()
+                ->with('erros', $this->validator->getErrors());
+        }
 
         $this->cafeModel->insert([
-            'nome' => $this->request->getPost('nome'),
-            'origem' => $this->request->getPost('origem'),
-            'descricao' => $this->request->getPost('descricao'),
+            'nome' => trim($this->request->getPost('nome')),
+            'origem' => trim($this->request->getPost('origem')),
+            'descricao' => trim((string) $this->request->getPost('descricao')),
             'perfil' => $this->request->getPost('perfil'),
             'torra' => $this->request->getPost('torra'),
-            'intensidade' => $this->request->getPost('intensidade'),
             'forma_envio' => $formaEnvio,
             'moagem' => $formaEnvio === 'MOIDO' ? $this->request->getPost('moagem') : null,
             'disponivel' => $this->request->getPost('disponivel') ? 1 : 0,
@@ -58,14 +64,20 @@ class CafesController extends BaseController
     public function update($id)
     {
         $formaEnvio = $this->request->getPost('forma_envio');
+        $rules = $this->regrasValidacaoCafe($formaEnvio);
+
+        if (!$this->validate($rules, $this->mensagensValidacaoCafe())) {
+            return redirect()->back()
+                ->withInput()
+                ->with('erros', $this->validator->getErrors());
+        }
 
         $this->cafeModel->update($id, [
-            'nome' => $this->request->getPost('nome'),
-            'origem' => $this->request->getPost('origem'),
-            'descricao' => $this->request->getPost('descricao'),
+            'nome' => trim($this->request->getPost('nome')),
+            'origem' => trim($this->request->getPost('origem')),
+            'descricao' => trim((string) $this->request->getPost('descricao')),
             'perfil' => $this->request->getPost('perfil'),
             'torra' => $this->request->getPost('torra'),
-            'intensidade' => $this->request->getPost('intensidade'),
             'forma_envio' => $formaEnvio,
             'moagem' => $formaEnvio === 'MOIDO' ? $this->request->getPost('moagem') : null,
             'disponivel' => $this->request->getPost('disponivel') ? 1 : 0,
@@ -89,6 +101,51 @@ class CafesController extends BaseController
             'Frutado',
             'Intenso',
             'Explorador',
+        ];
+    }
+
+    private function regrasValidacaoCafe(?string $formaEnvio): array
+    {
+        $rules = [
+            'nome' => 'required',
+            'origem' => 'required',
+            'descricao' => 'permit_empty',
+            'perfil' => 'required',
+            'torra' => 'required',
+            'forma_envio' => 'required|in_list[GRAOS,MOIDO]',
+            'moagem' => 'permit_empty',
+        ];
+
+        if ($formaEnvio === 'MOIDO') {
+            $rules['moagem'] = 'required|in_list[FINA,MEDIA_FINA,MEDIA,GROSSA]';
+        }
+
+        return $rules;
+    }
+
+    private function mensagensValidacaoCafe(): array
+    {
+        return [
+            'nome' => [
+                'required' => 'Informe o nome do café.',
+            ],
+            'origem' => [
+                'required' => 'Informe a origem do café.',
+            ],
+            'perfil' => [
+                'required' => 'Selecione o perfil sensorial do café.',
+            ],
+            'torra' => [
+                'required' => 'Selecione a torra do café.',
+            ],
+            'forma_envio' => [
+                'required' => 'Selecione a forma de envio.',
+                'in_list' => 'Selecione uma forma de envio válida.',
+            ],
+            'moagem' => [
+                'required' => 'Selecione a moagem quando a forma de envio for moído.',
+                'in_list' => 'Selecione uma moagem válida.',
+            ],
         ];
     }
 }

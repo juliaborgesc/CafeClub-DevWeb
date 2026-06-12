@@ -16,7 +16,6 @@ class CafeModel extends Model
         'descricao',
         'perfil',
         'torra',
-        'intensidade',
         'forma_envio',
         'moagem',
         'disponivel',

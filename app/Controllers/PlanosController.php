@@ -28,9 +28,15 @@ class PlanosController extends BaseController
 
     public function store()
     {
+        if (!$this->validate($this->regrasValidacaoPlano(), $this->mensagensValidacaoPlano())) {
+            return redirect()->back()
+                ->withInput()
+                ->with('erros', $this->validator->getErrors());
+        }
+
         $this->planosModel->insert([
-            'nome' => $this->request->getPost('nome'),
-            'descricao' => $this->request->getPost('descricao'),
+            'nome' => trim($this->request->getPost('nome')),
+            'descricao' => trim($this->request->getPost('descricao')),
             'valor' => $this->request->getPost('valor')
         ]);
 
@@ -46,9 +52,15 @@ class PlanosController extends BaseController
 
     public function update($id)
     {
+        if (!$this->validate($this->regrasValidacaoPlano(), $this->mensagensValidacaoPlano())) {
+            return redirect()->back()
+                ->withInput()
+                ->with('erros', $this->validator->getErrors());
+        }
+
         $this->planosModel->update($id, [
-            'nome' => $this->request->getPost('nome'),
-            'descricao' => $this->request->getPost('descricao'),
+            'nome' => trim($this->request->getPost('nome')),
+            'descricao' => trim($this->request->getPost('descricao')),
             'valor' => $this->request->getPost('valor')
         ]);
 
@@ -60,5 +72,31 @@ class PlanosController extends BaseController
         $this->planosModel->delete($id);
 
         return redirect()->to('admin/planos');
+    }
+
+    private function regrasValidacaoPlano(): array
+    {
+        return [
+            'nome' => 'required',
+            'descricao' => 'required',
+            'valor' => 'required|numeric|greater_than[0]',
+        ];
+    }
+
+    private function mensagensValidacaoPlano(): array
+    {
+        return [
+            'nome' => [
+                'required' => 'Informe o nome do plano.',
+            ],
+            'descricao' => [
+                'required' => 'Informe a descrição do plano.',
+            ],
+            'valor' => [
+                'required' => 'Informe o valor do plano.',
+                'numeric' => 'Informe um valor numérico.',
+                'greater_than' => 'O valor do plano precisa ser maior que zero.',
+            ],
+        ];
     }
 }

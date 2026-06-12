@@ -16,7 +16,6 @@
                 <th>Origem</th>
                 <th>Perfil</th>
                 <th>Torra</th>
-                <th>Intensidade</th>
                 <th>Envio</th>
                 <th>Moagem</th>
                 <th>Disponibilidade</th>
@@ -34,7 +33,6 @@
                 <td><?= $cafe['origem'] ?></td>
                 <td><?= $cafe['perfil'] ?></td>
                 <td><?= esc($cafe['torra'] ?? '-') ?></td>
-                <td><?= esc($cafe['intensidade'] ?? '-') ?>/10</td>
                 <td><?= ($cafe['forma_envio'] ?? '') === 'MOIDO' ? 'Moído' : 'Grãos' ?></td>
                 <td><?= esc($cafe['moagem'] ?: 'Sem moagem') ?></td>
                 <td>

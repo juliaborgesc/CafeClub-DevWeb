@@ -3,6 +3,14 @@
 
 <h1>Editar Plano</h1>
 
+<?php if (session()->getFlashdata('erros')): ?>
+    <div class="alert alert-danger">
+        <?php foreach (session()->getFlashdata('erros') as $erro): ?>
+            <div><?= esc($erro) ?></div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
     <form action="<?= base_url('admin/planos/update/'.$plano['id']) ?>" method="post">
 
         <div class="mb-3">
@@ -10,15 +18,17 @@
             <input
                 type="text"
                 name="nome"
-                value="<?= $plano['nome'] ?>"
-                class="form-control">
+                value="<?= esc(old('nome', $plano['nome'])) ?>"
+                class="form-control"
+                required>
         </div>
 
         <div class="mb-3">
             <label>Descrição</label>
             <textarea
                 name="descricao"
-                class="form-control"><?= $plano['descricao'] ?></textarea>
+                class="form-control"
+                required><?= esc(old('descricao', $plano['descricao'])) ?></textarea>
         </div>
 
         <div class="mb-3">
@@ -26,9 +36,11 @@
             <input
                 type="number"
                 step="0.01"
+                min="0.01"
                 name="valor"
-                value="<?= $plano['valor'] ?>"
-                class="form-control">
+                value="<?= esc(old('valor', $plano['valor'])) ?>"
+                class="form-control"
+                required>
         </div>
 
         <button type="submit" class="btn btn-primary">

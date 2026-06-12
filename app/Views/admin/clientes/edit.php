@@ -3,6 +3,14 @@
 
 <h1>Editar Cliente</h1>
 
+<?php if (session()->getFlashdata('erros')): ?>
+    <div class="alert alert-danger">
+        <?php foreach (session()->getFlashdata('erros') as $erro): ?>
+            <div><?= esc($erro) ?></div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
     <form action="<?= base_url('admin/clientes/update/'.$cliente['id']) ?>" method="post">
 
         <div class="mb-3">
@@ -10,8 +18,9 @@
             <input
                 type="text"
                 name="nome"
-                value="<?= $cliente['nome'] ?>"
-                class="form-control">
+                value="<?= esc(old('nome', $cliente['nome'])) ?>"
+                class="form-control"
+                required>
         </div>
 
         <div class="mb-3">
@@ -19,8 +28,18 @@
             <input
                 type="email"
                 name="email"
-                value="<?= $cliente['email'] ?>"
+                value="<?= esc(old('email', $cliente['email'])) ?>"
+                class="form-control"
+                required>
+        </div>
+
+        <div class="mb-3">
+            <label>Nova senha</label>
+            <input
+                type="password"
+                name="senha"
                 class="form-control">
+            <small class="text-muted">Deixe em branco para manter a senha atual.</small>
         </div>
 
         <div class="mb-3">
@@ -28,7 +47,7 @@
             <input
                 type="text"
                 name="telefone"
-                value="<?= $cliente['telefone'] ?>"
+                value="<?= esc(old('telefone', $cliente['telefone'])) ?>"
                 class="form-control">
         </div>
 

@@ -3,14 +3,22 @@
 
 <h1>Cadastrar Assinatura</h1>
 
+<?php if (session()->getFlashdata('erros')): ?>
+    <div class="alert alert-danger">
+        <?php foreach (session()->getFlashdata('erros') as $erro): ?>
+            <div><?= esc($erro) ?></div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
     <form action="<?= base_url('admin/assinaturas/store') ?>" method="post">
 
         <div class="mb-3">
             <label>Cliente</label>
 
-            <select name="cliente_id" class="form-select">
+            <select name="cliente_id" class="form-select" required>
                 <?php foreach ($clientes as $cliente): ?>
-                    <option value="<?= $cliente['id'] ?>">
+                    <option value="<?= $cliente['id'] ?>" <?= old('cliente_id') == $cliente['id'] ? 'selected' : '' ?>>
                         <?= $cliente['nome'] ?>
                     </option>
                 <?php endforeach; ?>
@@ -20,9 +28,9 @@
         <div class="mb-3">
             <label>Plano</label>
 
-            <select name="plano_id" class="form-select">
+            <select name="plano_id" class="form-select" required>
                 <?php foreach ($planos as $plano): ?>
-                    <option value="<?= $plano['id'] ?>">
+                    <option value="<?= $plano['id'] ?>" <?= old('plano_id') == $plano['id'] ? 'selected' : '' ?>>
                         <?= $plano['nome'] ?>
                     </option>
                 <?php endforeach; ?>
@@ -35,16 +43,18 @@
             <input
                 type="date"
                 name="data_inicio"
+                value="<?= esc(old('data_inicio')) ?>"
                 class="form-control">
+            <small class="text-muted">Se ficar em branco, será preenchida com a data atual.</small>
         </div>
 
         <div class="mb-3">
             <label>Status</label>
 
-            <select name="status" class="form-select">
-                <option value="Ativa">Ativa</option>
-                <option value="Inativa">Inativa</option>
-                <option value="Cancelada">Cancelada</option>
+            <select name="status" class="form-select" required>
+                <option value="Ativa" <?= old('status', 'Ativa') === 'Ativa' ? 'selected' : '' ?>>Ativa</option>
+                <option value="Inativa" <?= old('status') === 'Inativa' ? 'selected' : '' ?>>Inativa</option>
+                <option value="Cancelada" <?= old('status') === 'Cancelada' ? 'selected' : '' ?>>Cancelada</option>
             </select>
         </div>
 
