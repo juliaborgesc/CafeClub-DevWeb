@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Clientes</title>
+<?php $titulo = 'Clientes'; ?>
+<?= view('admin/layout_top') ?>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+<h1>Clientes Cadastrados</h1>
 
-<div class="container mt-5">
-
-    <h1>Clientes Cadastrados</h1>
-
-    <a href="<?= base_url('clientes/create') ?>" class="btn btn-success mb-3">
+    <a href="<?= base_url('admin/clientes/create') ?>" class="btn btn-success mb-3">
         Novo Cliente
     </a>
 
@@ -49,12 +40,12 @@
                 <td><?= $cliente['plano_ativo'] ? 'Ativo' : 'Inativo' ?></td>
 
                 <td>
-                    <a href="<?= base_url('clientes/edit/'.$cliente['id']) ?>"
+                    <a href="<?= base_url('admin/clientes/edit/'.$cliente['id']) ?>"
                        class="btn btn-warning btn-sm">
                         Editar
                     </a>
 
-                    <a href="<?= base_url('clientes/excluir/'.$cliente['id']) ?>"
+                    <a href="<?= base_url('admin/clientes/excluir/'.$cliente['id']) ?>"
                        class="btn btn-danger btn-sm">
                         Excluir
                     </a>
@@ -68,7 +59,5 @@
 
     </table>
 
-</div>
+<?= view('admin/layout_bottom') ?>
 
-</body>
-</html>

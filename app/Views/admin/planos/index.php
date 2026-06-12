@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Planos</title>
-    <link rel="icon" href="<?= base_url('images/logo.svg') ?>" type="image/svg+xml">
+<?php $titulo = 'Planos'; ?>
+<?= view('admin/layout_top') ?>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+<h1>Planos do Clube</h1>
 
-<div class="container mt-5">
-
-    <h1>Planos do Clube</h1>
-
-    <a href="<?= base_url('planos/create') ?>" class="btn btn-success mb-3">
+    <a href="<?= base_url('admin/planos/create') ?>" class="btn btn-success mb-3">
         Novo Plano
     </a>
 
@@ -40,12 +30,12 @@
 
                 <td>
 
-                    <a href="<?= base_url('planos/edit/'.$plano['id']) ?>"
+                    <a href="<?= base_url('admin/planos/edit/'.$plano['id']) ?>"
                        class="btn btn-warning btn-sm">
                         Editar
                     </a>
 
-                    <a href="<?= base_url('planos/excluir/'.$plano['id']) ?>"
+                    <a href="<?= base_url('admin/planos/excluir/'.$plano['id']) ?>"
                        class="btn btn-danger btn-sm">
                         Excluir
                     </a>
@@ -60,7 +50,5 @@
 
     </table>
 
-</div>
+<?= view('admin/layout_bottom') ?>
 
-</body>
-</html>

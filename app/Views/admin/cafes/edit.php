@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Editar Café</title>
-    <link rel="icon" href="<?= base_url('images/logo.svg') ?>" type="image/svg+xml">
+<?php $titulo = 'Editar Café'; ?>
+<?= view('admin/layout_top') ?>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+<h1>Editar Café</h1>
 
-<div class="container mt-5">
-
-    <h1>Editar Café</h1>
-
-    <form action="<?= base_url('cafes/update/'.$cafe['id']) ?>" method="post">
+    <form action="<?= base_url('admin/cafes/update/'.$cafe['id']) ?>" method="post">
 
         <div class="mb-3">
             <label>Nome</label>
@@ -70,13 +60,11 @@
             Atualizar
         </button>
 
-        <a href="<?= base_url('cafes') ?>" class="btn btn-secondary">
+        <a href="<?= base_url('admin/cafes') ?>" class="btn btn-secondary">
             Voltar
         </a>
 
     </form>
 
-</div>
+<?= view('admin/layout_bottom') ?>
 
-</body>
-</html>

@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\ClientesModel;
 use App\Models\EnderecosModel;
+use App\Models\AssinaturasModel;
+use App\Models\PlanosModel;
 
 class Home extends BaseController
 {
@@ -136,16 +138,55 @@ class Home extends BaseController
         if ($redir = $this->verificarLogin()) return $redir;
 
         $plano = $this->request->getPost('plano');
+        $planosPermitidos = [
+            'basico'  => 'Básico',
+            'gold'    => 'Gold',
+            'premium' => 'Premium',
+        ];
 
-        if (!in_array($plano, ['basico', 'gold', 'premium'])) {
+        if (!array_key_exists($plano, $planosPermitidos)) {
             return redirect()->to('/planos')->with('erro', 'Plano inválido.');
         }
 
-        $model = new ClientesModel();
-        $model->update(session()->get('cliente_id'), [
+        $planosModel = new PlanosModel();
+        $planoBanco = $planosModel->where('nome', $planosPermitidos[$plano])->first();
+
+        if (!$planoBanco) {
+            return redirect()->to('/planos')
+                ->with('erro', 'Plano não encontrado. Cadastre os planos no painel admin antes de assinar.');
+        }
+
+        $clienteId = session()->get('cliente_id');
+        $assinaturasModel = new AssinaturasModel();
+        $clientesModel = new ClientesModel();
+        $db = db_connect();
+
+        $db->transStart();
+
+        $assinaturasModel
+            ->where('cliente_id', $clienteId)
+            ->where('status', 'Ativa')
+            ->set(['status' => 'Inativa'])
+            ->update();
+
+        $assinaturasModel->insert([
+            'cliente_id'   => $clienteId,
+            'plano_id'     => $planoBanco['id'],
+            'data_inicio'  => date('Y-m-d'),
+            'status'       => 'Ativa',
+        ]);
+
+        $clientesModel->update($clienteId, [
             'plano'       => $plano,
             'plano_ativo' => 1,
         ]);
+
+        $db->transComplete();
+
+        if (!$db->transStatus()) {
+            return redirect()->to('/planos')
+                ->with('erro', 'Não foi possível confirmar a assinatura. Tente novamente.');
+        }
 
         return redirect()->to('/')
             ->with('sucesso', 'Assinatura confirmada! Bem-vindo ao Brasa Café Clube.');

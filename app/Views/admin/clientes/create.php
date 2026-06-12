@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Novo Cliente</title>
+<?php $titulo = 'Novo Cliente'; ?>
+<?= view('admin/layout_top') ?>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+<h1>Cadastrar Cliente</h1>
 
-<div class="container mt-5">
-
-    <h1>Cadastrar Cliente</h1>
-
-    <form action="<?= base_url('clientes/store') ?>" method="post">
+    <form action="<?= base_url('admin/clientes/store') ?>" method="post">
 
         <div class="mb-3">
             <label>Nome</label>
@@ -38,13 +29,11 @@
             Salvar
         </button>
 
-        <a href="<?= base_url('clientes') ?>" class="btn btn-secondary">
+        <a href="<?= base_url('admin/clientes') ?>" class="btn btn-secondary">
             Voltar
         </a>
 
     </form>
 
-</div>
+<?= view('admin/layout_bottom') ?>
 
-</body>
-</html>

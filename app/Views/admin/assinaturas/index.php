@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Assinaturas</title>
+<?php $titulo = 'Assinaturas'; ?>
+<?= view('admin/layout_top') ?>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-
-<div class="container mt-5">
-
-    <h1>Assinaturas</h1>
+<h1>Assinaturas</h1>
 
     <a href="<?= base_url('admin/assinaturas/create') ?>" class="btn btn-success mb-3">
         Nova Assinatura
@@ -58,7 +49,5 @@
 
     </table>
 
-</div>
+<?= view('admin/layout_bottom') ?>
 
-</body>
-</html>

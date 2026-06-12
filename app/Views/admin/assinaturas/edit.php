@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Editar Assinatura</title>
+<?php $titulo = 'Editar Assinatura'; ?>
+<?= view('admin/layout_top') ?>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-
-<div class="container mt-5">
-
-    <h1>Editar Assinatura</h1>
+<h1>Editar Assinatura</h1>
 
     <form action="<?= base_url('admin/assinaturas/update/'.$assinatura['id']) ?>" method="post">
 
@@ -89,7 +80,5 @@
 
     </form>
 
-</div>
+<?= view('admin/layout_bottom') ?>
 
-</body>
-</html>
