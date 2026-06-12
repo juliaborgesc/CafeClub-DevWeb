@@ -47,6 +47,9 @@
                 <div class="auth-alert auth-alert-success">
                     <i class="hgi-stroke hgi-checkmark-circle-02"></i>
                     <p><?= esc(session()->getFlashdata('sucesso')) ?></p>
+                    <button type="button" class="flash-close" aria-label="Fechar mensagem">
+                        <i class="hgi-stroke hgi-cancel-01"></i>
+                    </button>
                 </div>
             <?php endif; ?>
 
@@ -54,6 +57,9 @@
                 <div class="auth-alert auth-alert-error">
                     <i class="hgi-stroke hgi-alert-circle"></i>
                     <p><?= esc(session()->getFlashdata('erro')) ?></p>
+                    <button type="button" class="flash-close" aria-label="Fechar mensagem">
+                        <i class="hgi-stroke hgi-cancel-01"></i>
+                    </button>
                 </div>
             <?php endif; ?>
 
@@ -101,6 +107,19 @@
     </section>
 
 </main>
+
+<script>
+    document.querySelectorAll('.auth-alert').forEach((flash) => {
+        const close = flash.querySelector('.flash-close');
+        const hide = () => {
+            flash.classList.add('is-hiding');
+            setTimeout(() => flash.remove(), 260);
+        };
+
+        if (close) close.addEventListener('click', hide);
+        setTimeout(hide, 5000);
+    });
+</script>
 
 </body>
 </html>

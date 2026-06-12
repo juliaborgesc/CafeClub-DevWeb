@@ -2173,6 +2173,11 @@ footer {
     color: var(--accent);
 }
 
+.user-pill-profile {
+    background: rgba(255, 255, 255, 0.68);
+    border-color: rgba(226, 132, 19, 0.22);
+}
+
 .login-link {
     color: var(--primary-dark);
     font-size: 14px;
@@ -2218,9 +2223,10 @@ footer {
     font-size: 14px;
     font-weight: 800;
     animation: homeFlashIn 0.35s ease both;
+    transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.home-flash i {
+.home-flash > i {
     font-size: 18px;
     color: var(--accent);
 }
@@ -2235,6 +2241,41 @@ footer {
 
 .home-flash-error i {
     color: #b0382e;
+}
+
+.home-flash span {
+    flex: 1;
+}
+
+.flash-close {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: -4px -6px -4px 2px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(79, 51, 40, 0.08);
+    color: var(--primary-dark);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.flash-close:hover {
+    background: rgba(79, 51, 40, 0.16);
+    transform: scale(1.04);
+}
+
+.flash-close i {
+    margin: 0;
+    color: currentColor;
+    font-size: 15px;
+}
+
+.home-flash.is-hiding {
+    opacity: 0;
+    transform: translateY(-10px);
 }
 
 @keyframes homeFlashIn {
@@ -2278,6 +2319,182 @@ footer {
     font-weight: 900 !important;
 }
 
+.logged-quiz-callout,
+.logged-profile-hero {
+    padding: 9.5rem 0 4rem;
+    background:
+        radial-gradient(circle at 8% 12%, rgba(226, 132, 19, 0.13), transparent 30%),
+        linear-gradient(135deg, #faf5e9 0%, #f0e6d3 100%);
+}
+
+.logged-quiz-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2.4rem;
+    border: 1.5px solid rgba(79, 51, 40, 0.10);
+    border-radius: 32px;
+    background: rgba(255, 252, 244, 0.9);
+    box-shadow: 0 24px 70px rgba(79, 51, 40, 0.12);
+}
+
+.logged-kicker {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.logged-quiz-copy h1,
+.logged-profile-content h1 {
+    color: var(--primary-dark);
+    line-height: 0.98;
+}
+
+.logged-quiz-copy h1 {
+    max-width: 620px;
+    margin-bottom: 1rem;
+    font-size: clamp(2.4rem, 6vw, 5rem);
+}
+
+.logged-quiz-copy p {
+    max-width: 620px;
+    color: rgba(79, 51, 40, 0.72);
+    font-size: 1.08rem;
+    line-height: 1.7;
+}
+
+.logged-quiz-actions,
+.logged-profile-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+}
+
+.logged-profile-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+    gap: 2rem;
+    overflow: hidden;
+    padding: clamp(1.6rem, 4vw, 3.25rem);
+    border: 1.5px solid rgba(79, 51, 40, 0.10);
+    border-radius: 36px;
+    background:
+        radial-gradient(circle at 88% 18%, color-mix(in srgb, var(--profile-color) 20%, transparent), transparent 28%),
+        rgba(255, 252, 244, 0.94);
+    box-shadow: 0 24px 70px rgba(79, 51, 40, 0.16);
+}
+
+.logged-profile-accent {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 12px;
+    background: var(--profile-color);
+}
+
+.logged-profile-content {
+    position: relative;
+    z-index: 1;
+}
+
+.logged-profile-content h1 {
+    max-width: 680px;
+    margin-bottom: 1rem;
+    font-size: clamp(1.45rem, 3vw, 2.25rem);
+}
+
+.logged-profile-content h1 span {
+    display: block;
+    color: var(--profile-color);
+    font-size: clamp(3rem, 7vw, 6rem);
+}
+
+.logged-profile-tagline {
+    color: var(--profile-color);
+    font-size: 1.15rem;
+    font-weight: 900;
+}
+
+.logged-profile-desc {
+    max-width: 680px;
+    margin-top: 0.85rem;
+    color: rgba(79, 51, 40, 0.72);
+    font-size: 1.04rem;
+    line-height: 1.75;
+}
+
+.logged-profile-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+    margin: 1.8rem 0;
+}
+
+.logged-profile-metrics div {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 0.75rem;
+    row-gap: 0.25rem;
+    padding: 1rem;
+    border: 1.5px solid rgba(79, 51, 40, 0.08);
+    border-radius: 20px;
+    background: rgba(250, 245, 233, 0.72);
+}
+
+.logged-profile-metrics i {
+    grid-row: span 2;
+    color: var(--profile-color);
+    font-size: 1.25rem;
+}
+
+.logged-profile-metrics span {
+    color: rgba(79, 51, 40, 0.58);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.logged-profile-metrics strong {
+    color: var(--primary-dark);
+    font-size: 0.98rem;
+}
+
+.logged-profile-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 360px;
+}
+
+.logged-profile-glow {
+    position: absolute;
+    width: min(110%, 430px);
+    height: min(72%, 300px);
+    border-radius: 999px;
+    background:
+        radial-gradient(circle at 50% 48%, color-mix(in srgb, var(--profile-color) 24%, transparent) 0%, transparent 68%);
+    filter: blur(34px);
+    opacity: 0.64;
+}
+
+.logged-profile-visual img {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 360px);
+    max-height: 390px;
+    object-fit: contain;
+    filter: drop-shadow(0 28px 34px rgba(79, 51, 40, 0.20));
+}
+
 @media (max-width: 768px) {
     .site-auth-actions {
         display: none;
@@ -2288,6 +2505,51 @@ footer {
         left: 16px;
         right: 16px;
         justify-content: center;
+    }
+
+    .logged-quiz-callout,
+    .logged-profile-hero {
+        padding: 7.25rem 0 2.5rem;
+    }
+
+    .logged-quiz-card,
+    .logged-profile-card {
+        border-radius: 28px;
+    }
+
+    .logged-quiz-card {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+
+    .logged-quiz-actions,
+    .logged-profile-actions {
+        width: 100%;
+    }
+
+    .logged-quiz-actions .btn,
+    .logged-profile-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .logged-profile-card {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+    }
+
+    .logged-profile-metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .logged-profile-visual {
+        min-height: 260px;
+        order: -1;
+    }
+
+    .logged-profile-visual img {
+        max-height: 280px;
     }
 }
 

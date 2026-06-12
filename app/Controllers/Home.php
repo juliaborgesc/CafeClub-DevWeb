@@ -9,9 +9,49 @@ use App\Models\PlanosModel;
 
 class Home extends BaseController
 {
+    private array $perfisResumo = [
+        'iniciante' => [
+            'nome'    => 'Iniciante',
+            'tagline' => 'Confortável, suave e sem complicação',
+            'cor'     => '#c8845a',
+            'imagem'  => 'iniciante.svg',
+            'desc'    => 'Seu café ideal é acolhedor, doce e fácil de amar, com notas de chocolate, caramelo e castanhas.',
+        ],
+        'equilibrado' => [
+            'nome'    => 'Equilibrado',
+            'tagline' => 'A xícara no ponto certo',
+            'cor'     => '#788aa3',
+            'imagem'  => 'equilibrado.svg',
+            'desc'    => 'Você combina com cafés limpos e harmônicos, com doçura, acidez e corpo bem balanceados.',
+        ],
+        'frutado' => [
+            'nome'    => 'Frutado',
+            'tagline' => 'Vivo, leve e aromático',
+            'cor'     => '#59a96a',
+            'imagem'  => 'frutado.svg',
+            'desc'    => 'Seu paladar pede cafés aromáticos, com brilho, acidez gostosa e notas de frutas e florais.',
+        ],
+        'intenso' => [
+            'nome'    => 'Intenso',
+            'tagline' => 'Marcante do primeiro ao último gole',
+            'cor'     => '#e28413',
+            'imagem'  => 'intenso.svg',
+            'desc'    => 'Você gosta de cafés encorpados e profundos, com notas de cacau, especiarias e final longo.',
+        ],
+        'explorador' => [
+            'nome'    => 'Explorador',
+            'tagline' => 'Para quem quer descobrir o novo',
+            'cor'     => '#92614a',
+            'imagem'  => 'explorador.svg',
+            'desc'    => 'Sua experiência ideal passa por cafés diferentes, microlotes e processos com personalidade.',
+        ],
+    ];
+
     public function index(): string
     {
-        return view('home/index');
+        return view('home/index', [
+            'resumoCliente' => $this->montarResumoCliente(),
+        ]);
     }
 
     public function planos()
@@ -120,6 +160,97 @@ class Home extends BaseController
             return redirect()->to('/login')->with('erro', 'Faça login para continuar.');
         }
         return null;
+    }
+
+    private function montarResumoCliente(): array
+    {
+        $resumo = [
+            'logado' => false,
+            'fezQuiz' => false,
+        ];
+
+        $clienteId = session()->get('cliente_id');
+
+        if (!$clienteId) {
+            return $resumo;
+        }
+
+        $clientesModel = new ClientesModel();
+        $cliente = $clientesModel->find($clienteId);
+
+        if (!$cliente) {
+            return $resumo;
+        }
+
+        $perfilKey = strtolower((string) ($cliente['perfil'] ?? ''));
+        $perfil = $this->perfisResumo[$perfilKey] ?? null;
+        $fezQuiz = $perfil !== null;
+        $primeiroNome = explode(' ', trim($cliente['nome'] ?? 'Cliente'))[0] ?: 'Cliente';
+        $assinaturaAtiva = (new AssinaturasModel())
+            ->where('cliente_id', $clienteId)
+            ->where('status', 'Ativa')
+            ->orderBy('id', 'DESC')
+            ->first();
+        $planoAssinatura = $assinaturaAtiva
+            ? (new PlanosModel())->find($assinaturaAtiva['plano_id'])
+            : null;
+
+        return [
+            'logado' => true,
+            'fezQuiz' => $fezQuiz,
+            'primeiroNome' => $primeiroNome,
+            'nome' => $cliente['nome'] ?? $primeiroNome,
+            'perfilKey' => $perfilKey,
+            'perfilNome' => $perfil['nome'] ?? null,
+            'perfilTagline' => $perfil['tagline'] ?? null,
+            'perfilDescricao' => $perfil['desc'] ?? null,
+            'perfilCor' => $perfil['cor'] ?? '#4f3328',
+            'perfilImagem' => $perfil['imagem'] ?? null,
+            'metodoLabel' => $this->labelMetodo($cliente['metodo_preparo'] ?? null),
+            'envioLabel' => $this->labelEnvio($cliente['forma_envio'] ?? null),
+            'moagemLabel' => $this->labelMoagem($cliente['moagem'] ?? null),
+            'planoLabel' => $planoAssinatura['nome'] ?? $this->labelPlano($cliente['plano'] ?? null),
+            'statusPlano' => $assinaturaAtiva['status'] ?? (!empty($cliente['plano_ativo']) ? 'Ativo' : 'Sem plano ativo'),
+        ];
+    }
+
+    private function labelMetodo(?string $metodo): string
+    {
+        return [
+            'COADOR' => 'Coador',
+            'V60' => 'V60',
+            'ESPRESSO' => 'Espresso',
+            'MOKA' => 'Moka italiana',
+            'AEROPRESS' => 'Aeropress',
+            'PRENSA_FRANCESA' => 'Prensa francesa',
+        ][$metodo ?? ''] ?? 'Não informado';
+    }
+
+    private function labelEnvio(?string $envio): string
+    {
+        return [
+            'GRAOS' => 'Em grãos',
+            'MOIDO' => 'Moído',
+        ][$envio ?? ''] ?? 'Não informado';
+    }
+
+    private function labelMoagem(?string $moagem): string
+    {
+        return [
+            'FINA' => 'Fina',
+            'MEDIA_FINA' => 'Média-fina',
+            'MEDIA' => 'Média',
+            'GROSSA' => 'Grossa',
+        ][$moagem ?? ''] ?? 'Moer na hora';
+    }
+
+    private function labelPlano(?string $plano): string
+    {
+        return [
+            'basico' => 'Básico',
+            'gold' => 'Gold',
+            'premium' => 'Premium',
+        ][$plano ?? ''] ?? 'Nenhum plano';
     }
 
     public function assinar(string $plano)

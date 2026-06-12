@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\ClientesModel;
+use App\Models\AssinaturasModel;
+use App\Models\PlanosModel;
 
 class QuizController extends BaseController
 {
@@ -347,6 +349,34 @@ class QuizController extends BaseController
 
         $dados      = $this->perfis[$perfilKey] ?? $this->perfis['equilibrado'];
         $dadosPlano = $this->planos[$planoKey] ?? $this->planos['gold'];
+        $clienteAtual = session()->get('cliente_id')
+            ? (new ClientesModel())->find(session()->get('cliente_id'))
+            : null;
+        $assinaturaAtiva = null;
+        $planoAtual = null;
+
+        if (session()->get('cliente_id')) {
+            $assinaturaAtiva = (new AssinaturasModel())
+                ->where('cliente_id', session()->get('cliente_id'))
+                ->where('status', 'Ativa')
+                ->orderBy('id', 'DESC')
+                ->first();
+
+            if ($assinaturaAtiva) {
+                $planoAtual = (new PlanosModel())->find($assinaturaAtiva['plano_id']);
+            }
+        }
+
+        $planoAtualKey = $this->normalizarPlanoKey($planoAtual['nome'] ?? null);
+
+        if (!$assinaturaAtiva && !empty($clienteAtual['plano_ativo'])) {
+            $planoAtualKey = $clienteAtual['plano'] ?? null;
+            $planoAtual = [
+                'nome' => $this->planos[$planoAtualKey]['nome'] ?? 'Plano ativo',
+            ];
+        }
+
+        $temPlanoAtivo = $assinaturaAtiva || !empty($clienteAtual['plano_ativo']);
 
         $metodoLabel = $this->metodos[$metodo ?? ''] ?? null;
         $moagemLabel = $this->moagens[$moagem ?? ''] ?? null;
@@ -362,11 +392,32 @@ class QuizController extends BaseController
         }
 
         return view('quiz/resultado', [
-            'perfilKey'   => $perfilKey,
-            'dados'       => $dados,
-            'dadosPlano'  => $dadosPlano,
-            'textoMetodo' => $textoMetodo,
+            'perfilKey'        => $perfilKey,
+            'dados'            => $dados,
+            'dadosPlano'       => $dadosPlano,
+            'planoKey'         => $planoKey,
+            'planoAtual'       => $planoAtual,
+            'planoAtualKey'    => $planoAtualKey,
+            'assinaturaAtiva'  => $assinaturaAtiva,
+            'temPlanoAtivo'    => $temPlanoAtivo,
+            'trocaRecomendada' => $temPlanoAtivo && $planoAtualKey !== $planoKey,
+            'textoMetodo'      => $textoMetodo,
         ]);
+    }
+
+    private function normalizarPlanoKey(?string $nome): ?string
+    {
+        $nome = strtolower(strtr(trim((string) $nome), [
+            'á' => 'a',
+            'Á' => 'a',
+        ]));
+
+        return match ($nome) {
+            'basico' => 'basico',
+            'gold' => 'gold',
+            'premium' => 'premium',
+            default => null,
+        };
     }
 
     private function calcularResultado()

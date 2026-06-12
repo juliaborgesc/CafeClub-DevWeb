@@ -15,6 +15,11 @@
                 <th>Nome</th>
                 <th>Origem</th>
                 <th>Perfil</th>
+                <th>Torra</th>
+                <th>Intensidade</th>
+                <th>Envio</th>
+                <th>Moagem</th>
+                <th>Disponibilidade</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -28,6 +33,17 @@
                 <td><?= $cafe['nome'] ?></td>
                 <td><?= $cafe['origem'] ?></td>
                 <td><?= $cafe['perfil'] ?></td>
+                <td><?= esc($cafe['torra'] ?? '-') ?></td>
+                <td><?= esc($cafe['intensidade'] ?? '-') ?>/10</td>
+                <td><?= ($cafe['forma_envio'] ?? '') === 'MOIDO' ? 'Moído' : 'Grãos' ?></td>
+                <td><?= esc($cafe['moagem'] ?: 'Sem moagem') ?></td>
+                <td>
+                    <?php if (!empty($cafe['disponivel'])): ?>
+                        <span class="badge text-bg-success">Disponível</span>
+                    <?php else: ?>
+                        <span class="badge text-bg-secondary">Indisponível</span>
+                    <?php endif; ?>
+                </td>
 
                 <td>
                     <a href="<?= base_url('admin/cafes/edit/'.$cafe['id']) ?>"

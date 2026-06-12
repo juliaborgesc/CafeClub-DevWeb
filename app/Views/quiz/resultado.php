@@ -44,25 +44,53 @@
         </div>
 
         <div class="result-plano">
-            <p class="result-plano-label">
-                <i class="hgi-stroke hgi-star"></i>
-                Plano recomendado pra você
-            </p>
-            <div class="result-plano-card">
-                <div class="result-plano-info">
-                    <span class="result-plano-nome"><?= htmlspecialchars($dadosPlano['nome']) ?></span>
-                    <span class="result-plano-preco"><?= htmlspecialchars($dadosPlano['preco']) ?><small>/mês</small></span>
+            <?php if ($temPlanoAtivo): ?>
+                <p class="result-plano-label">
+                    <i class="hgi-stroke hgi-checkmark-circle-02"></i>
+                    Você já tem um plano ativo
+                </p>
+
+                <div class="result-plano-card result-plano-card-active">
+                    <div class="result-current-plan">
+                        <span>Plano atual</span>
+                        <strong><?= htmlspecialchars($planoAtual['nome'] ?? 'Plano ativo') ?></strong>
+                    </div>
+
+                    <p class="result-plano-desc">
+                        Seu perfil foi atualizado. Você pode continuar com o plano atual ou comparar os planos disponíveis se quiser mudar.
+                    </p>
+
+                    <div class="result-plan-actions">
+                        <a href="<?= base_url('/') ?>" class="result-choice-cta result-choice-cta-primary">
+                            Continuar com o mesmo
+                        </a>
+
+                        <a href="<?= base_url('/planos') ?>" class="result-choice-cta">
+                            Mudar de plano
+                        </a>
+                    </div>
                 </div>
-                <p class="result-plano-desc"><?= htmlspecialchars($dadosPlano['desc']) ?></p>
-                <a href="<?= base_url($dadosPlano['url']) ?>" class="result-cta" style="margin-top: 0;">
-                    Assinar agora
+            <?php else: ?>
+                <p class="result-plano-label">
+                    <i class="hgi-stroke hgi-star"></i>
+                    Plano recomendado pra você
+                </p>
+                <div class="result-plano-card">
+                    <div class="result-plano-info">
+                        <span class="result-plano-nome"><?= htmlspecialchars($dadosPlano['nome']) ?></span>
+                        <span class="result-plano-preco"><?= htmlspecialchars($dadosPlano['preco']) ?><small>/mês</small></span>
+                    </div>
+                    <p class="result-plano-desc"><?= htmlspecialchars($dadosPlano['desc']) ?></p>
+                    <a href="<?= base_url($dadosPlano['url']) ?>" class="result-cta" style="margin-top: 0;">
+                        Assinar agora
+                        <i class="hgi-stroke hgi-arrow-right-01"></i>
+                    </a>
+                </div>
+                <a href="<?= base_url('/planos') ?>" class="result-plano-ver-todos">
+                    Ver todos os planos
                     <i class="hgi-stroke hgi-arrow-right-01"></i>
                 </a>
-            </div>
-            <a href="<?= base_url('/planos') ?>" class="result-plano-ver-todos">
-                Ver todos os planos
-                <i class="hgi-stroke hgi-arrow-right-01"></i>
-            </a>
+            <?php endif; ?>
         </div>
 
         <button type="button" class="result-share" onclick="compartilhar('<?= htmlspecialchars($dados['nome']) ?>')">

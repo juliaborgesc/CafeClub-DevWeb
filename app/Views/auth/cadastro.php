@@ -52,6 +52,9 @@
                             <p><?= esc($erro) ?></p>
                         <?php endforeach; ?>
                     </div>
+                    <button type="button" class="flash-close" aria-label="Fechar mensagem">
+                        <i class="hgi-stroke hgi-cancel-01"></i>
+                    </button>
                 </div>
             <?php endif; ?>
 
@@ -246,6 +249,17 @@ function mascaraTelefone(input) {
 
         form.classList.add('was-validated');
     }, false);
+
+    document.querySelectorAll('.auth-alert').forEach((flash) => {
+        const close = flash.querySelector('.flash-close');
+        const hide = () => {
+            flash.classList.add('is-hiding');
+            setTimeout(() => flash.remove(), 260);
+        };
+
+        if (close) close.addEventListener('click', hide);
+        setTimeout(hide, 7000);
+    });
 })();
 </script>
 

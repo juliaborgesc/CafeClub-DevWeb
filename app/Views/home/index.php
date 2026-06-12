@@ -15,9 +15,10 @@
 </head>
 <body>
 <?php
-$clienteLogado = session()->get('cliente_id');
-$clienteNome = session()->get('cliente_nome');
-$primeiroNome = $clienteNome ? explode(' ', trim($clienteNome))[0] : null;
+$resumoCliente = $resumoCliente ?? ['logado' => false, 'fezQuiz' => false];
+$clienteLogado = $resumoCliente['logado'] ?? false;
+$clienteComQuiz = $clienteLogado && ($resumoCliente['fezQuiz'] ?? false);
+$primeiroNome = $resumoCliente['primeiroNome'] ?? null;
 ?>
 
     <!-- Header -->
@@ -40,7 +41,11 @@ $primeiroNome = $clienteNome ? explode(' ', trim($clienteNome))[0] : null;
                     Olá, <?= esc($primeiroNome) ?>
                 </span>
 
-                <a href="<?= base_url('/quiz') ?>" class="btn btn-primary">Fazer Quiz</a>
+                <?php if ($clienteComQuiz): ?>
+                    <span class="user-pill user-pill-profile">
+                        Perfil: <?= esc($resumoCliente['perfilNome']) ?>
+                    </span>
+                <?php endif; ?>
 
                 <a href="<?= base_url('/logout') ?>" class="btn btn-ghost">Sair</a>
             <?php else: ?>
@@ -64,7 +69,9 @@ $primeiroNome = $clienteNome ? explode(' ', trim($clienteNome))[0] : null;
         <?php if ($clienteLogado): ?>
             <div class="mobile-user-box">
                 <span>Olá, <?= esc($primeiroNome) ?></span>
-                <small>Bem-vindo de volta ao Brasa</small>
+                <small>
+                    <?= $clienteComQuiz ? 'Perfil: ' . esc($resumoCliente['perfilNome']) : 'Bem-vindo de volta ao Brasa' ?>
+                </small>
             </div>
         <?php endif; ?>
 
@@ -74,7 +81,6 @@ $primeiroNome = $clienteNome ? explode(' ', trim($clienteNome))[0] : null;
         <a href="#faq" onclick="toggleMobileMenu()">FAQ</a>
 
         <?php if ($clienteLogado): ?>
-            <a href="<?= base_url('/quiz') ?>" class="btn btn-primary" onclick="toggleMobileMenu()">Fazer Quiz</a>
             <a href="<?= base_url('/logout') ?>" class="mobile-logout" onclick="toggleMobileMenu()">Sair da conta</a>
         <?php else: ?>
             <a href="<?= base_url('/login') ?>" onclick="toggleMobileMenu()">Entrar</a>
@@ -85,65 +91,149 @@ $primeiroNome = $clienteNome ? explode(' ', trim($clienteNome))[0] : null;
     <?php if (session()->getFlashdata('sucesso')): ?>
         <div class="home-flash home-flash-success">
             <i class="hgi-stroke hgi-checkmark-circle-02"></i>
-            <?= esc(session()->getFlashdata('sucesso')) ?>
+            <span><?= esc(session()->getFlashdata('sucesso')) ?></span>
+            <button type="button" class="flash-close" aria-label="Fechar mensagem">
+                <i class="hgi-stroke hgi-cancel-01"></i>
+            </button>
         </div>
     <?php endif; ?>
 
     <?php if (session()->getFlashdata('erro')): ?>
         <div class="home-flash home-flash-error">
             <i class="hgi-stroke hgi-alert-circle"></i>
-            <?= esc(session()->getFlashdata('erro')) ?>
+            <span><?= esc(session()->getFlashdata('erro')) ?></span>
+            <button type="button" class="flash-close" aria-label="Fechar mensagem">
+                <i class="hgi-stroke hgi-cancel-01"></i>
+            </button>
         </div>
     <?php endif; ?>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <video class="hero-video" autoplay muted loop playsinline>
-            <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Cozy_Coffee_Mascot_Animation-omm2SY8eyctOIN74AkgCSHn4ss0vdD.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-        <div class="hero-blur"></div>
+    <?php if (!$clienteLogado): ?>
+        <!-- Hero Section -->
+        <section class="hero">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Cozy_Coffee_Mascot_Animation-omm2SY8eyctOIN74AkgCSHn4ss0vdD.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-blur"></div>
 
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title font-display">
-                    Seu Café
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title font-display">
+                        Seu Café
 
-                    <span class="hero-highlight">Do Seu Jeito</span>
+                        <span class="hero-highlight">Do Seu Jeito</span>
 
-                    Todo Mês
-                </h1>
+                        Todo Mês
+                    </h1>
 
-                <p style="color: var(--text-light); font-size: 1.25rem; max-width: 500px; margin-bottom: 1rem; opacity: 0.9;">
-                    Descubra seu perfil sensorial e receba cafés especiais selecionados especialmente para você.
-                </p>
-                <div class="hero-cta">
-                    <?php if ($clienteLogado): ?>
-                        <a href="<?= base_url('/quiz') ?>" class="btn btn-primary">Fazer meu quiz</a>
-                        <a href="#planos" class="btn btn-outline" style="border-color: white; color: white;">Ver planos</a>
-                    <?php else: ?>
+                    <p style="color: var(--text-light); font-size: 1.25rem; max-width: 500px; margin-bottom: 1rem; opacity: 0.9;">
+                        Descubra seu perfil sensorial e receba cafés especiais selecionados especialmente para você.
+                    </p>
+                    <div class="hero-cta">
                         <a href="<?= base_url('/cadastro') ?>" class="btn btn-primary">Criar conta e fazer quiz</a>
                         <a href="<?= base_url('/login') ?>" class="btn btn-outline" style="border-color: white; color: white;">Já tenho conta</a>
-                    <?php endif; ?>
+                    </div>
+                </div>
+
+                <div class="hero-icons">
+                    <a href="<?= base_url('/cadastro') ?>" class="hero-icon-item">
+                        <i class="hgi-stroke hgi-quiz-02"></i>
+                        <span>Faça o Quiz</span>
+                    </a>
+                    <a href="#planos" class="hero-icon-item">
+                        <i class="hgi-stroke hgi-shopping-bag-03"></i>
+                        <span>Escolha o Plano</span>
+                    </a>
+                    <a href="#perfis" class="hero-icon-item">
+                        <i class="hgi-stroke hgi-truck-delivery"></i>
+                        <span>Receba o Café Ideal</span>
+                    </a>
                 </div>
             </div>
+        </section>
+    <?php elseif (!$clienteComQuiz): ?>
+        <section class="logged-quiz-callout">
+            <div class="container">
+                <div class="logged-quiz-card">
+                    <div class="logged-quiz-copy">
+                        <span class="logged-kicker">Área do cliente</span>
+                        <h1 class="font-display">Seu café ideal começa pelo quiz</h1>
+                        <p>
+                            Responda algumas perguntas rápidas para liberar sua curadoria personalizada,
+                            seu perfil sensorial e recomendações de preparo.
+                        </p>
+                    </div>
 
-            <div class="hero-icons">
-                <a href="<?= $clienteLogado ? base_url('/quiz') : base_url('/cadastro') ?>" class="hero-icon-item">
-                    <i class="hgi-stroke hgi-quiz-02"></i>
-                    <span>Faça o Quiz</span>
-                </a>
-                <a href="#planos" class="hero-icon-item">
-                    <i class="hgi-stroke hgi-shopping-bag-03"></i>
-                    <span>Escolha o Plano</span>
-                </a>
-                <a href="#perfis" class="hero-icon-item">
-                    <i class="hgi-stroke hgi-truck-delivery"></i>
-                    <span>Receba o Café Ideal</span>
-                </a>
+                    <div class="logged-quiz-actions">
+                        <a href="<?= base_url('/quiz') ?>" class="btn btn-primary">Fazer meu quiz</a>
+                        <a href="#como-funciona" class="btn btn-ghost">Ver como funciona</a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    <?php else: ?>
+        <section class="logged-profile-hero" style="--profile-color: <?= esc($resumoCliente['perfilCor']) ?>;">
+            <div class="container">
+                <article class="logged-profile-card">
+                    <div class="logged-profile-accent"></div>
+
+                    <div class="logged-profile-content">
+                        <span class="logged-kicker">Painel - <?= esc($primeiroNome) ?></span>
+
+                        <h1 class="font-display">
+                            Seu perfil:
+                            <span><?= esc($resumoCliente['perfilNome']) ?></span>
+                        </h1>
+
+                        <p class="logged-profile-tagline">
+                            <?= esc($resumoCliente['perfilTagline']) ?>
+                        </p>
+
+                        <p class="logged-profile-desc">
+                            <?= esc($resumoCliente['perfilDescricao']) ?>
+                        </p>
+
+                        <div class="logged-profile-metrics">
+                            <div>
+                                <i class="hgi-stroke hgi-coffee-02"></i>
+                                <span>Método</span>
+                                <strong><?= esc($resumoCliente['metodoLabel']) ?></strong>
+                            </div>
+                            <div>
+                                <i class="hgi-stroke hgi-package"></i>
+                                <span>Envio</span>
+                                <strong><?= esc($resumoCliente['envioLabel']) ?></strong>
+                            </div>
+                            <div>
+                                <i class="hgi-stroke hgi-coffee-01"></i>
+                                <span>Moagem</span>
+                                <strong><?= esc($resumoCliente['moagemLabel']) ?></strong>
+                            </div>
+                            <div>
+                                <i class="hgi-stroke hgi-checkmark-circle-02"></i>
+                                <span>Plano</span>
+                                <strong><?= esc($resumoCliente['planoLabel']) ?> · <?= esc($resumoCliente['statusPlano']) ?></strong>
+                            </div>
+                        </div>
+
+                        <div class="logged-profile-actions">
+                            <a href="#planos" class="btn btn-primary">Ver planos</a>
+                            <a href="<?= base_url('/quiz') ?>" class="btn btn-ghost">Refazer teste</a>
+                        </div>
+                    </div>
+
+                    <div class="logged-profile-visual">
+                        <div class="logged-profile-glow"></div>
+                        <img
+                            src="<?= base_url('images/perfis/' . $resumoCliente['perfilImagem']) ?>"
+                            alt="Ilustração do perfil <?= esc($resumoCliente['perfilNome']) ?>"
+                        >
+                    </div>
+                </article>
+            </div>
+        </section>
+    <?php endif; ?>
 
     <!-- Marquee Banner -->
     <div class="marquee">
@@ -333,8 +423,8 @@ $primeiroNome = $clienteNome ? explode(' ', trim($clienteNome))[0] : null;
             </div>
 
             <div class="profiles-actions">
-                <a href="<?= $clienteLogado ? base_url('/quiz') : base_url('/cadastro') ?>" class="btn btn-primary profiles-btn">
-                    <?= $clienteLogado ? 'Refazer o Quiz' : 'Faça o Quiz' ?>
+                <a href="<?= $clienteComQuiz ? base_url('/perfis') : ($clienteLogado ? base_url('/quiz') : base_url('/cadastro')) ?>" class="btn btn-primary profiles-btn">
+                    <?= $clienteComQuiz ? 'Ver meu perfil' : ($clienteLogado ? 'Fazer o Quiz' : 'Faça o Quiz') ?>
                 </a>
 
                 <a href="<?= base_url('/perfis') ?>" class="profiles-more-link">
@@ -375,7 +465,7 @@ $primeiroNome = $clienteNome ? explode(' ', trim($clienteNome))[0] : null;
                                 <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
                                 <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
                             </ul>
-                            <a href="<?= $clienteLogado ? base_url('/quiz') : base_url('/cadastro') ?>" class="btn btn-outline plan-cta">Assinar agora</a>
+                            <a href="<?= $clienteComQuiz ? base_url('/assinar/basico') : ($clienteLogado ? base_url('/quiz') : base_url('/cadastro')) ?>" class="btn btn-outline plan-cta">Assinar agora</a>
                         </div>
 
                         <!-- Gold -->
@@ -394,7 +484,7 @@ $primeiroNome = $clienteNome ? explode(' ', trim($clienteNome))[0] : null;
                                 <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
                                 <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
                             </ul>
-                            <a href="<?= $clienteLogado ? base_url('/quiz') : base_url('/cadastro') ?>" class="btn btn-primary plan-cta">Assinar agora</a>
+                            <a href="<?= $clienteComQuiz ? base_url('/assinar/gold') : ($clienteLogado ? base_url('/quiz') : base_url('/cadastro')) ?>" class="btn btn-primary plan-cta">Assinar agora</a>
                         </div>
 
                         <!-- Premium -->
@@ -414,7 +504,7 @@ $primeiroNome = $clienteNome ? explode(' ', trim($clienteNome))[0] : null;
                                 <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Frete grátis</li>
                                 <li><i class="hgi-stroke hgi-checkmark-circle-02"></i> Cancele quando quiser</li>
                             </ul>
-                            <a href="<?= $clienteLogado ? base_url('/quiz') : base_url('/cadastro') ?>" class="btn btn-secondary plan-cta">Assinar agora</a>
+                            <a href="<?= $clienteComQuiz ? base_url('/assinar/premium') : ($clienteLogado ? base_url('/quiz') : base_url('/cadastro')) ?>" class="btn btn-secondary plan-cta">Assinar agora</a>
                         </div>
 
                     </div><!-- /.planos-carousel-track -->
@@ -533,7 +623,9 @@ $primeiroNome = $clienteNome ? explode(' ', trim($clienteNome))[0] : null;
         <div class="container">
             <h2 class="section-title font-display">Descubra Seu Café Ideal</h2>
             <p class="section-subtitle">Comece sua jornada sensorial hoje mesmo e transforme sua relação com o café.</p>
-            <?php if ($clienteLogado): ?>
+            <?php if ($clienteComQuiz): ?>
+                <a href="#planos" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.25rem 3rem;">Ver planos</a>
+            <?php elseif ($clienteLogado): ?>
                 <a href="<?= base_url('/quiz') ?>" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.25rem 3rem;">Fazer meu quiz</a>
             <?php else: ?>
                 <a href="<?= base_url('/cadastro') ?>" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.25rem 3rem;">Criar conta e começar</a>
@@ -713,6 +805,17 @@ $primeiroNome = $clienteNome ? explode(' ', trim($clienteNome))[0] : null;
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
+        });
+
+        document.querySelectorAll('.home-flash').forEach((flash) => {
+            const close = flash.querySelector('.flash-close');
+            const hide = () => {
+                flash.classList.add('is-hiding');
+                setTimeout(() => flash.remove(), 260);
+            };
+
+            if (close) close.addEventListener('click', hide);
+            setTimeout(hide, 5000);
         });
     </script>
 </body>

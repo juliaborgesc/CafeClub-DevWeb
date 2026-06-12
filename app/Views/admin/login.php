@@ -58,6 +58,39 @@
             border-color: #3f281f;
             color: #fff;
         }
+
+        .admin-flash {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: opacity .25s ease, transform .25s ease;
+        }
+
+        .admin-flash span {
+            flex: 1;
+        }
+
+        .flash-close {
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 999px;
+            background: rgba(79, 51, 40, .08);
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .flash-close i {
+            font-size: 14px;
+        }
+
+        .admin-flash.is-hiding {
+            opacity: 0;
+            transform: translateY(-8px);
+        }
     </style>
 </head>
 <body>
@@ -71,14 +104,20 @@
         <p>Entre com uma conta de administrador para acessar o painel.</p>
 
         <?php if (session()->getFlashdata('erro')): ?>
-            <div class="alert alert-danger">
-                <?= esc(session()->getFlashdata('erro')) ?>
+            <div class="alert alert-danger admin-flash">
+                <span><?= esc(session()->getFlashdata('erro')) ?></span>
+                <button type="button" class="flash-close" aria-label="Fechar mensagem">
+                    <i class="hgi-stroke hgi-cancel-01"></i>
+                </button>
             </div>
         <?php endif; ?>
 
         <?php if (session()->getFlashdata('sucesso')): ?>
-            <div class="alert alert-success">
-                <?= esc(session()->getFlashdata('sucesso')) ?>
+            <div class="alert alert-success admin-flash">
+                <span><?= esc(session()->getFlashdata('sucesso')) ?></span>
+                <button type="button" class="flash-close" aria-label="Fechar mensagem">
+                    <i class="hgi-stroke hgi-cancel-01"></i>
+                </button>
             </div>
         <?php endif; ?>
 
@@ -119,5 +158,18 @@
             Voltar para o site
         </a>
     </main>
+
+    <script>
+        document.querySelectorAll('.admin-flash').forEach((flash) => {
+            const close = flash.querySelector('.flash-close');
+            const hide = () => {
+                flash.classList.add('is-hiding');
+                setTimeout(() => flash.remove(), 260);
+            };
+
+            if (close) close.addEventListener('click', hide);
+            setTimeout(hide, 5000);
+        });
+    </script>
 </body>
 </html>

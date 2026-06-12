@@ -18,7 +18,8 @@ class CafeModel extends Model
         'torra',
         'intensidade',
         'forma_envio',
-        'moagem'
+        'moagem',
+        'disponivel',
     ];
 
     protected $returnType = 'array';
