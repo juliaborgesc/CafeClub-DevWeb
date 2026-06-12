@@ -18,12 +18,12 @@ class ClientesController extends BaseController
     {
         $dados['clientes'] = $this->clientesModel->findAll();
 
-        return view('clientes/index', $dados);
+        return view('admin/clientes/index', $dados);
     }
 
     public function create()
     {
-        return view('clientes/create');
+        return view('admin/clientes/create');
     }
 
     public function store()
@@ -38,14 +38,14 @@ class ClientesController extends BaseController
             'forma_envio' => $this->request->getPost('forma_envio')
         ]);
 
-        return redirect()->to('/clientes');
+        return redirect()->to('admin/clientes');
     }
 
     public function edit($id)
     {
         $dados['cliente'] = $this->clientesModel->find($id);
 
-        return view('clientes/edit', $dados);
+        return view('admin/clientes/edit', $dados);
     }
 
     public function update($id)
@@ -60,13 +60,13 @@ class ClientesController extends BaseController
             'forma_envio' => $this->request->getPost('forma_envio')
         ]);
 
-        return redirect()->to('/clientes');
+        return redirect()->to('admin/clientes');
     }
 
     public function excluir($id)
     {
         $this->clientesModel->delete($id);
 
-        return redirect()->to('/clientes');
+        return redirect()->to('admin/clientes');
     }
 }

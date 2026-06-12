@@ -18,12 +18,12 @@ class CafesController extends BaseController
     {
         $dados['cafes'] = $this->cafeModel->findAll();
 
-        return view('cafes/index', $dados);
+        return view('admin/cafes/index', $dados);
     }
 
     public function create()
     {
-        return view('cafes/create');
+        return view('admin/cafes/create');
     }
 
     public function store()
@@ -35,14 +35,14 @@ class CafesController extends BaseController
             'perfil' => $this->request->getPost('perfil')
         ]);
 
-        return redirect()->to('/cafes');
+        return redirect()->to('admin/cafes');
     }
 
     public function edit($id)
     {
         $dados['cafe'] = $this->cafeModel->find($id);
 
-        return view('cafes/edit', $dados);
+        return view('admin/cafes/edit', $dados);
     }
 
     public function update($id)
@@ -54,13 +54,13 @@ class CafesController extends BaseController
             'perfil' => $this->request->getPost('perfil')
         ]);
 
-        return redirect()->to('/cafes');
+        return redirect()->to('admin/cafes');
     }
 
     public function excluir($id)
     {
         $this->cafeModel->delete($id);
 
-        return redirect()->to('/cafes');
+        return redirect()->to('admin/cafes');
     }
 }

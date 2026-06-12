@@ -18,12 +18,12 @@ class PlanosController extends BaseController
     {
         $dados['planos'] = $this->planosModel->findAll();
 
-        return view('planos/index', $dados);
+        return view('admin/planos/index', $dados);
     }
 
     public function create()
     {
-        return view('planos/create');
+        return view('admin/planos/create');
     }
 
     public function store()
@@ -34,14 +34,14 @@ class PlanosController extends BaseController
             'valor' => $this->request->getPost('valor')
         ]);
 
-        return redirect()->to('/planos');
+        return redirect()->to('admin/planos');
     }
 
     public function edit($id)
     {
         $dados['plano'] = $this->planosModel->find($id);
 
-        return view('planos/edit', $dados);
+        return view('admin/planos/edit', $dados);
     }
 
     public function update($id)
@@ -52,13 +52,13 @@ class PlanosController extends BaseController
             'valor' => $this->request->getPost('valor')
         ]);
 
-        return redirect()->to('/planos');
+        return redirect()->to('admin/planos');
     }
 
     public function excluir($id)
     {
         $this->planosModel->delete($id);
 
-        return redirect()->to('/planos');
+        return redirect()->to('admin/planos');
     }
 }

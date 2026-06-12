@@ -24,16 +24,16 @@
     </a>
 
     <p class="sidebar-label">Cadastros</p>
-    <a href="<?= base_url('/clientes') ?>" class="sidebar-link">
+    <a href="<?= base_url('admin/clientes') ?>" class="sidebar-link">
         <i class="hgi-stroke hgi-user-multiple-02"></i> Clientes
     </a>
-    <a href="<?= base_url('/cafes') ?>" class="sidebar-link">
+    <a href="<?= base_url('admin/cafes') ?>" class="sidebar-link">
         <i class="hgi-stroke hgi-coffee-01"></i> Cafés
     </a>
-    <a href="<?= base_url('/planos/index') ?>" class="sidebar-link">
+    <a href="<?= base_url('admin/planos/index') ?>" class="sidebar-link">
         <i class="hgi-stroke hgi-package"></i> Planos
     </a>
-    <a href="<?= base_url('/assinaturas') ?>" class="sidebar-link">
+    <a href="<?= base_url('admin/assinaturas') ?>" class="sidebar-link">
         <i class="hgi-stroke hgi-star"></i> Assinaturas
     </a>
 
@@ -63,7 +63,7 @@
     <div class="row g-4">
 
         <div class="col-md-6 col-lg-3">
-            <a href="<?= base_url('/clientes') ?>" class="menu-card">
+            <a href="<?= base_url('admin/clientes') ?>" class="menu-card">
                 <div class="menu-card-icon" style="background:#faf5e9;">
                     <i class="hgi-stroke hgi-user-multiple-02" style="color:#4f3328;"></i>
                 </div>
@@ -76,7 +76,7 @@
         </div>
 
         <div class="col-md-6 col-lg-3">
-            <a href="<?= base_url('/cafes') ?>" class="menu-card">
+            <a href="<?= base_url('admin/cafes') ?>" class="menu-card">
                 <div class="menu-card-icon" style="background:#faf5e9;">
                     <i class="hgi-stroke hgi-coffee-01" style="color:#c8845a;"></i>
                 </div>
@@ -89,7 +89,7 @@
         </div>
 
         <div class="col-md-6 col-lg-3">
-            <a href="<?= base_url('/planos/index') ?>" class="menu-card">
+            <a href="<?= base_url('admin/planos') ?>" class="menu-card">
                 <div class="menu-card-icon" style="background:#faf5e9;">
                     <i class="hgi-stroke hgi-package" style="color:#788aa3;"></i>
                 </div>
@@ -102,7 +102,7 @@
         </div>
 
         <div class="col-md-6 col-lg-3">
-            <a href="<?= base_url('/assinaturas') ?>" class="menu-card">
+            <a href="<?= base_url('admin/assinaturas') ?>" class="menu-card">
                 <div class="menu-card-icon" style="background:#faf5e9;">
                     <i class="hgi-stroke hgi-star" style="color:#e28413;"></i>
                 </div>

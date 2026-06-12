@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\AssinaturasModel;
+use App\Models\ClientesModel;
+use App\Models\PlanosModel;
 
 class AssinaturasController extends BaseController
 {
@@ -18,12 +20,30 @@ class AssinaturasController extends BaseController
     {
         $dados['assinaturas'] = $this->assinaturasModel->findAll();
 
-        return view('assinaturas/index', $dados);
+        return view('admin/assinaturas/index', $dados);
     }
 
     public function create()
     {
-        return view('assinaturas/create');
+        $clientesModel = new ClientesModel();
+        $planosModel = new PlanosModel();
+
+        $dados['clientes'] = $clientesModel->findAll();
+        $dados['planos'] = $planosModel->findAll();
+
+        return view('admin/assinaturas/create', $dados);
+    }
+
+    public function edit($id)
+    {
+        $clientesModel = new ClientesModel();
+        $planosModel = new PlanosModel();
+
+        $dados['assinatura'] = $this->assinaturasModel->find($id);
+        $dados['clientes'] = $clientesModel->findAll();
+        $dados['planos'] = $planosModel->findAll();
+
+        return view('admin/assinaturas/edit', $dados);
     }
 
     public function store()
@@ -35,14 +55,7 @@ class AssinaturasController extends BaseController
             'status' => $this->request->getPost('status')
         ]);
 
-        return redirect()->to('/assinaturas');
-    }
-
-    public function edit($id)
-    {
-        $dados['assinatura'] = $this->assinaturasModel->find($id);
-
-        return view('assinaturas/edit', $dados);
+        return redirect()->to('admin/assinaturas');
     }
 
     public function update($id)
@@ -54,13 +67,13 @@ class AssinaturasController extends BaseController
             'status' => $this->request->getPost('status')
         ]);
 
-        return redirect()->to('/assinaturas');
+        return redirect()->to('admin/assinaturas');
     }
 
     public function excluir($id)
     {
         $this->assinaturasModel->delete($id);
 
-        return redirect()->to('/assinaturas');
+        return redirect()->to('admin/assinaturas');
     }
 }
